@@ -8,18 +8,18 @@
                 <ul class="sf-menu" id="fh5co-primary-menu">
                     <li class="active"><a href="{% url 'index' %}">Home</a></li>
                     <li>
-                        <a href="vacation.html" class="fh5co-sub-ddown">Vacations</a>
+                        <a href="{% url 'vacation' %}" class="fh5co-sub-ddown">Vacations</a>
                         <ul class="fh5co-sub-menu">
+                            <li><a href="{% url 'adventure' %}">Adventure</a></li>
+                            <li><a href="#">Wildlife</a></li>
+                            <li><a href="#">Pilgrimage</a></li>
                             <li><a href="#">Family</a></li>
-                            <li><a href="#">CSS3 &amp; HTML5</a></li>
-                            <li><a href="#">Angular JS</a></li>
-                            <li><a href="#">Node JS</a></li>
-                            <li><a href="#">Django &amp; Python</a></li>
+                            <li><a href="{% url 'tDetails' %}">Honeymoon</a></li>
                         </ul>
                     </li>
-                    <li><a href="flight.html">Flights</a></li>
+                    <!-- <li><a href="flight.html">Flights</a></li> -->
                     <li><a href="{% url 'hotel' %}">Hotel</a></li>
-                    <li><a href="car.html">Car</a></li>
+                    <!-- <li><a href="car.html">Car</a></li> -->
                     <li><a href="{% url 'contact' %}">Contact</a></li>
                     <li><a href="{% url 'register' %}">Login/Register</a></li>
                 </ul>

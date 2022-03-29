@@ -10,6 +10,7 @@ class Hotel(models.Model):
     hotelDesc = models.TextField()
     roomType = models.CharField(max_length=50)
     price = models.IntegerField()
+    image = models.CharField(max_length=50,default='hotel1.webp')
 
     AVAILABLE = 'available'
     UNAVAILABLE = 'unavailable'
@@ -23,3 +24,38 @@ class Hotel(models.Model):
        choices=STATUS,
        default=AVAILABLE,
    )
+
+class Package(models.Model):
+    tourId = models.IntegerField(primary_key=True)
+    packageTitle = models.CharField(max_length=100)
+
+    ADVENTURE = 'adventure'
+    WILDLIFE = 'wildlife'
+    PILGRIMAGE = 'pilgrimage'
+    FAMILY = 'family'
+    HONEYMOON = 'honeymoon'
+    TYPE = [
+       (ADVENTURE,('Adventure')),
+       (WILDLIFE,('Wildlife')),
+       (PILGRIMAGE,('Pilgrimage')),
+       (FAMILY,('Family')),
+       (HONEYMOON,('Honeymoon')),
+    ]
+   # […]
+    type = models.CharField(
+       max_length=32,
+       choices=TYPE,
+       default=ADVENTURE,
+   )
+
+    image1 = models.CharField(max_length=50,default='tour.jpg')
+    image2 = models.CharField(max_length=50,default='tour.jpg')
+    packageDesc = models.TextField()
+    duration = models.CharField(max_length=50)
+    price = models.IntegerField()
+    disPrice = models.IntegerField()
+    discount = models.BooleanField()
+
+
+
+    

@@ -21,7 +21,7 @@
     <meta name="twitter:url" content=""/>
     <meta name="twitter:card" content=""/>
 
-    {% include 'links.html' %}
+    {% include 'CSS.html' %}
 
 </head>
 <body>
@@ -30,11 +30,109 @@
 
         {% include 'header.html' %}
 
+        <div id="fh5co-tours" class="fh5co-section-gray">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                        <h3>Hotel Name</h3>
+                        <p>Mountain hotel with outdoor pool, near Nakki Lake</p>
+                    </div>
+                </div>
+                <div class="row row-bottom-padded-md">
+		            <div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn">
+                        <div href="#">
+                            <img src="{% static 'images/hotel1.webp' %}" class="img-responsive">
+                        </div>
+                        <br>
+                        <a class="btn btn-primary btn-outline" href="#">Book Now <iclass="icon-arrow-right22"></i></a>
+                    </div>
+                    <div>
+                        <h3>Sterling Mount Abu</h3>
+                        <h2 style="color:#F78536">Rs. 8870</h2>
+                        <p>Neelkanth Road, Mount Abu, Abu Road,  Rajesthan, India - 307501</p>
+                        <p>Room Type : Classic Double Room</p>
+                        <p>Status : Available</p>
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn">
+                        <div href="#">
+                            <img src="{% static 'images/cafe.jpg' %}" alt="Free HTML5 Website Template by FreeHTML5.co"
+                                           class="img-responsive">
+                            <div class="desc hotel">
+                                <span></span>
+                                <h3>Cafe</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn">
+                        <div href="#"><img src="{% static 'images/amenities.jpg' %}" alt="Free HTML5 Website Template by FreeHTML5.co"
+                                           class="img-responsive">
+                            <div class="desc">
+                                <span></span>
+                                <h3>Amenities</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn">
+                        <div href="#"><img src="{% static 'images/gym.jpg' %}" alt="Free HTML5 Website Template by FreeHTML5.co"
+                                           class="img-responsive">
+                            <div class="desc">
+                                <span></span>
+                                <h3>Gym</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="row">
+                    <div class="col-md-4 animate-box">
 
+                        <div class="feature-left">
+                                <span class="icon">
+                                    <i class="icon-hotairballoon"></i>
+                                </span>
+                            <div class="feature-copy">
+                                <h3>Free WiFi</h3>
+                                <p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit.</p>
+                                <p><a href="#">Learn More</a></p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4 animate-box">
+                        <div class="feature-left">
+                                <span class="icon">
+                                    <i class="icon-search"></i>
+                                </span>
+                            <div class="feature-copy">
+                                <h3>Parking</h3>
+                                <p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit.</p>
+                                <p><a href="#">Learn More</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 animate-box">
+                        <div class="feature-left">
+                                <span class="icon">
+                                    <i class="icon-wallet"></i>
+                                </span>
+                            <div class="feature-copy">
+                                <h3>Restaurents</h3>
+                                <p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit.</p>
+                                <p><a href="#">Learn More</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         
+
         {% include 'footer.html' %}
     
     </div>
 </div>
+{% include 'JS.html' %}
 </body>
 </html>

@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Hotel
-
+from .models import Package
 # Create your views here.
 
 def index(request):
@@ -19,3 +19,14 @@ def hotel(request):
 
 def hDetails(request):
     return render(request,"hoteldetails.html")
+
+def vacation(request):
+    return render(request,"vacation.html")
+
+def adventure(request):
+    package = Package.objects.all()
+    return render(request,'adventure.html',{'package':package})
+    # filter(type='Adventure')
+
+def tDetails(request):
+    return render(request,"tourdetails.html")
