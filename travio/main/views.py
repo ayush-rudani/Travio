@@ -30,3 +30,12 @@ def adventure(request):
 
 def tDetails(request):
     return render(request,"tourdetails.html")
+
+def profile(request):
+    return render(request,"profilepage.html")
+
+def tHistory(request):
+    return render(request,"tourhistory.html")
+
+def payment(request):
+    return render(request,"payment.html")

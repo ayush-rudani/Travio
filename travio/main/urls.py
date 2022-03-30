@@ -10,5 +10,8 @@ urlpatterns = [
     path('hDetails',views.hDetails,name="hDetails"),
     path('vacation',views.vacation,name="vacation"),
     path('adventure',views.adventure,name="adventure"),
-    path('tDetails',views.tDetails,name="tDetails")
+    path('tDetails',views.tDetails,name="tDetails"),
+    path('profile',views.profile,name="profile"),
+    path('tHistory',views.tHistory,name="tHistory"),
+    path('payment',views.payment,name="payment"),
 ]
