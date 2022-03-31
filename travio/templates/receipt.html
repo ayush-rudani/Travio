@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Travel &mdash; 100% Free Fully Responsive HTML5 Template by FREEHTML5.co</title>
+    <title>Travio</title>
+    <link rel="icon" href="{% static 'images/icon.png' %}" type="image/icon type">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Free HTML5 Template by FREEHTML5.CO"/>
     <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive"/>
@@ -41,39 +42,28 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-                            <h3>Booking History</h3>
+                            <h3>Payment Receipt</h3>
                         </div>
                     </div>
-                    <table class="table table-striped">
-                        <thead>
-                          <tr>
-                            <th scope="col">Booking Item</th>
-                            <th scope="col">Total Fair</th>
-                            <th scope="col">Booking Date</th>
-                            <th scope="col">Type</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <th scope="row">Motorbike Adventure in Ladakh</th>
-                            <td>17999</td>
-                            <td>31-03-2022</td>
-                            <td>Package</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">Sterling Mount Abu</th>
-                            <td>8870</td>
-                            <td>1-04-2000</td>
-                            <td>Hotel</td>
-                          </tr>
-                        </tbody>
-                      </table>
+                    <div>
+                        <h4>Customer Details</h4>
+                        <p>Customer Name : Dhruvi Sherathiya</p>
+                        <p>Contact Number : 9313842951</p>
+                        <p>Email Id : dhruvisherathiya921@gmail.com</p>
+                        <h4>Tour Details</h4>
+                        <p>Package Name : Motorbike Adventure in Ladakh</p>
+                        <p>Tour Type : Adventure</p>
+                        <p>Tour Duration : 6 Days</p>
+                        <h4>Booking Details</h4>
+                        <p>Adults : 1  | Children : 0</p>
+                        <p>Booking Fair (For one person) : 17999</p>
+                        <p>Total Amount : 17999</p>
+                        <p>Booking Date : 31/03/2022</p>
+                        <p>Payment Number : 123456</p>
+                        <a class="btn btn-primary btn-outline" href="#">Print</a>
+                    </div>
                 </div>
             </div>
-
-
-
-
 
             {% include 'footer.html' %}
         </div>
