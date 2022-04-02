@@ -1,4 +1,5 @@
 from django.db import models
+# from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class Hotel(models.Model):
@@ -55,6 +56,17 @@ class Package(models.Model):
     price = models.IntegerField()
     disPrice = models.IntegerField()
     discount = models.BooleanField()
+
+class Userdata(models.Model):
+    username = models.CharField(max_length=50)
+    email = models.EmailField()
+    password = models.CharField(max_length=50)
+    image = models.CharField(max_length=50,default='tour.jpg')
+    address = models.TextField(null=True)
+    dob = models.DateField(null=True)
+    contact = models.IntegerField(null=True)
+    
+
 
 
 

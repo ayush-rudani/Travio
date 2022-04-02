@@ -55,52 +55,59 @@
                             </ul>
 
                             <!-- Tab panes -->
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="login">
-                                    <div class="row">
-                                        <div class="col-xxs-12 col-xs-12 mt">
-                                            <div class="input-field">
-                                                <label for="from">Username</label>
-                                                <input type="text" class="form-control" id="from-place"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-xxs-12 col-xs-12 mt alternate">
-                                            <div class="input-field">
-                                                <label for="date-start">Password</label>
-                                                <input type="text" class="form-control" id="date-start"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12">
-                                            <input type="submit" class="btn btn-primary btn-block"
-                                                value="Submit">
-                                        </div>
-                                    </div>
-                                </div>
+                            <form action="login" method="post"  class="tab-pane active" id="login">
+                                {%csrf_token %}
 
-                                <div role="tabpanel" class="tab-pane" id="register">
+                                <div class="tab-content">
+                                    <div role="tabpanel">
+                                        <div class="row">
+                                            <div class="col-xxs-12 col-xs-12 mt">
+                                                <div class="input-field">
+                                                    <label for="username">Username</label>
+                                                    <input type="text" class="form-control" id="username" name="username"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-xxs-12 col-xs-12 mt alternate">
+                                                <div class="input-field">
+                                                    <label for="password">Password</label>
+                                                    <input type="password" class="form-control" id="password" name="password"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <input type="submit" class="btn btn-primary btn-block"
+                                                    value="Submit">
+                                            </div>
+                                        </div>
+                                    </div>
+                            </form>
+                            
+                            <form action="signup" method="post" class="tab-pane" id="register">
+                                {%csrf_token %}
+
+                                <div role="tabpanel" >
                                     <div class="row">
                                         <div class="col-xxs-12 col-xs-12 mt">
                                             <div class="input-field">
-                                                <label for="from">Username</label>
-                                                <input type="text" class="form-control" id="from-place"/>
+                                                <label for="username">Username</label>
+                                                <input type="text" class="form-control" id="username" name="username"/>
                                             </div>
                                         </div>
                                         <div class="col-xxs-12 col-xs-12 mt alternate">
                                             <div class="input-field">
-                                                <label for="date-start">Email Id</label>
-                                                <input type="text" class="form-control" id="date-start"/>
+                                                <label for="email">Email Id</label>
+                                                <input type="email" class="form-control" id="email" name="email"/>
                                             </div>
                                         </div>
                                         <div class="col-xxs-12 col-xs-12 mt alternate">
                                             <div class="input-field">
-                                                <label for="date-start">Password</label>
-                                                <input type="text" class="form-control" id="date-start"/>
+                                                <label for="password">Password</label>
+                                                <input type="password" class="form-control" id="password" name="password"/>
                                             </div>
                                         </div>
                                         <div class="col-xxs-12 col-xs-12 mt alternate">
                                             <div class="input-field">
-                                                <label for="date-start"> Confirm Password</label>
-                                                <input type="text" class="form-control" id="date-start"/>
+                                                <label for="cpswd"> Confirm Password</label>
+                                                <input type="password" class="form-control" id="cpswd" name="cpswd"/>
                                             </div>
                                         </div>
                                         <div class="col-xs-12">
@@ -109,7 +116,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>

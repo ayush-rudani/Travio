@@ -36,35 +36,50 @@
     <div id="fh5co-wrapper">
         <div id="fh5co-page">
             {% include 'header.html' %}
+
+            {% for b in book %}
             <div class="desc profile-container row">
                <div class="container">
-                   <h2>Payment</h2>
                    <div id="fh5co-destination">
                     <div class="tour-fluid">
+
                         <div class="row">
-                            <form class="col-md-12" action="{%url 'receipt' %}">
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                                    <h3>Booking</h3>
+                                    <p>You are in the process of making a reservation for a <b> {{b.hotelName}} </b> trip.</p>
+                                </div>
+                            </div>
+                            <form class="col-md-12" action="{payment/{{b.hotelName}}}" method="post" >
                                 <div role="tabpanel" class="tab-pane" id="register">
                                         <div class="col-xxs-12 col-xs-12 mt">
                                             <div class="input-field">
-                                                <label for="from">Name on Card</label>
-                                                <input type="text" class="form-control" id="from-place"/>
+                                                <label for="fname">Full Name</label>
+                                                <input type="text" class="form-control" id="from-place" name="fname"/>
                                             </div>
                                         </div>
                                         <div class="col-xxs-12 col-xs-12 mt">
                                             <div class="input-field">
-                                                <label for="from">Card Number</label>
-                                                <input type="text" class="form-control" id="from-place" placeholder="1234-4567-1234-4567"/>
+                                                <label for="email">Email</label>
+                                                <input type="email" class="form-control" id="from-place" name="email"/>
                                             </div>
                                         </div>
                                         <div class="col-xxs-12 col-xs-12 mt">
                                             <div class="input-field">
-                                                <label for="from">CVV</label>
-                                                <input type="text" class="form-control" id="from-place" placeholder="123"/>
+                                                <label for="cnt">Contact</label>
+                                                <input type="text" class="form-control" id="from-place" name="cnt"/>
                                             </div>
-                                        </div><div class="col-xxs-12 col-xs-12 mt">
+                                        </div>
+                                        <div class="col-xxs-12 col-xs-12 mt">
                                             <div class="input-field">
-                                                <label for="from">Expiry Date</label>
-                                                <input type="text" class="form-control" id="from-place"/>
+                                                <label for="nop">Number of People</label>
+                                                <input type="number" class="form-control" id="nop" name="nop"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-xxs-12 col-xs-12 mt">
+                                            <div class="input-field">
+                                                <label for="tdate">Trip Date</label>
+                                                <input type="date" class="form-control" id="tdate" />
                                             </div>
                                         </div>
                                         <div class="col-xs-12">
@@ -79,6 +94,7 @@
                 
                 </div>
             </div>
+            {%endfor%}
         </div>
     </div>
     {% include 'footer.html' %}
