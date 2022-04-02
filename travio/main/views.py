@@ -1,3 +1,4 @@
+
 from django.http import HttpResponse
 from django.contrib import messages
 from django.shortcuts import render,redirect
@@ -6,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Hotel
 from .models import Package
 from .models import Userdata
+from .models import Booking
 # from .models import Userc
 
 # Create your views here.
@@ -51,8 +53,25 @@ def tHistory(request):
     return render(request,"tourhistory.html")
 
 @login_required(login_url='/login')
-def payment(request):
+def payment(request,hname):
     hname = Hotel.objects.all().filter(hotelName = hname)
+
+    for hb in hname :
+        name = hb.hotelName
+        price = hb.price
+
+    if request.method == 'POST':
+        fname = request.POST['fname']
+        email = request.POST['email']
+        cnt = request.POST['cnt']
+        people = request.POST['people']
+        tdate = request.POST['tdate']
+        #  Add dynamically userid here
+        hbooking = Booking(1,1,fname,email,cnt,people,tdate,name,price)
+        hbooking.save()
+        print('Booking info added')
+        messages.info(request,'Booking info added')
+
     return render(request,"payment.html")
 
 def receipt(request):

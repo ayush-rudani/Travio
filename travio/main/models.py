@@ -65,6 +65,18 @@ class Userdata(models.Model):
     address = models.TextField(null=True)
     dob = models.DateField(null=True)
     contact = models.IntegerField(null=True)
+
+class Booking(models.Model):
+    uid = models.IntegerField()
+    fname = models.CharField(max_length=50)
+    email = models.EmailField()
+    contact = models.IntegerField()
+    people = models.IntegerField()
+    tdate = models.DateField()
+    bookingName = models.CharField(max_length=50,default='')
+    bookingFair = models.IntegerField(default=0)
+
+
     
 
 

@@ -50,7 +50,8 @@
                                     <p>You are in the process of making a reservation for a <b> {{b.hotelName}} </b> trip.</p>
                                 </div>
                             </div>
-                            <form class="col-md-12" action="{payment/{{b.hotelName}}}" method="post" >
+                            <form class="col-md-12" action="payment/{{b.hotelName}}" method="post" >
+                                {%csrf_token %}
                                 <div role="tabpanel" class="tab-pane" id="register">
                                         <div class="col-xxs-12 col-xs-12 mt">
                                             <div class="input-field">
@@ -72,14 +73,14 @@
                                         </div>
                                         <div class="col-xxs-12 col-xs-12 mt">
                                             <div class="input-field">
-                                                <label for="nop">Number of People</label>
-                                                <input type="number" class="form-control" id="nop" name="nop"/>
+                                                <label for="people">Number of People</label>
+                                                <input type="number" class="form-control" id="people" name="people"/>
                                             </div>
                                         </div>
                                         <div class="col-xxs-12 col-xs-12 mt">
                                             <div class="input-field">
                                                 <label for="tdate">Trip Date</label>
-                                                <input type="date" class="form-control" id="tdate" />
+                                                <input type="date" class="form-control" id="tdate" name="tdate" />
                                             </div>
                                         </div>
                                         <div class="col-xs-12">
