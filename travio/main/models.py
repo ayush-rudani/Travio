@@ -13,7 +13,7 @@ class Hotel(models.Model):
     roomType = models.CharField(max_length=50)
     price = models.IntegerField()
     image = models.CharField(max_length=50,default='hotel1.webp')
-
+    bType = models.BooleanField(default=0)
     AVAILABLE = 'available'
     UNAVAILABLE = 'unavailable'
     STATUS = [
@@ -30,7 +30,7 @@ class Hotel(models.Model):
 class Package(models.Model):
     tourId = models.IntegerField(primary_key=True)
     packageTitle = models.CharField(max_length=100)
-
+    bType = models.BooleanField(default=1)
     ADVENTURE = 'adventure'
     WILDLIFE = 'wildlife'
     PILGRIMAGE = 'pilgrimage'
@@ -74,7 +74,7 @@ class Booking(models.Model):
     tdate = models.DateField()
     bookingName = models.CharField(max_length=50,default='')
     bookingFair = models.IntegerField(default=0)
-
+    type = models.BooleanField(default=0)
 
     
 

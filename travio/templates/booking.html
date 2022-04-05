@@ -42,15 +42,26 @@
                <div class="container">
                    <div id="fh5co-destination">
                     <div class="tour-fluid">
-
+                        <!-- {{b.hotelName}} -->
                         <div class="row">
                             <div class="row">
                                 <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
                                     <h3>Booking</h3>
-                                    <p>You are in the process of making a reservation for a <b> {{b.hotelName}} </b> trip.</p>
+                                    <p>You are in the process of making a reservation for a <b>
+                                        {% if b.hotelName %}  
+                                            {{ b.hotelName }}
+                                        {% elif b.packageTitle%}
+                                            {{ b.packageTitle }}
+                                        {% endif %}  
+                                    </b> trip.</p>
                                 </div>
                             </div>
-                            <form class="col-md-12" action="payment/{{b.hotelName}}" method="post" >
+                            <form class="col-md-12" action="payment/
+                            {% if b.hotelName %}  
+                                {{ b.hotelName }}
+                            {% elif b.packageTitle%}
+                                {{ b.packageTitle }}
+                            {% endif %}  " method="post" >
                                 {%csrf_token %}
                                 <div role="tabpanel" class="tab-pane" id="register">
                                         <div class="col-xxs-12 col-xs-12 mt">

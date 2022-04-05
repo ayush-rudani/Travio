@@ -49,17 +49,18 @@
                                 
                                 <a class="btn btn-primary btn-outline" href="{% url 'tHistory' %}" style="margin-top:30px;">Booking History</a>
                             </div>
+                            <!-- Backend remaining for user-form -->
                             <form class="col-md-8">
                                 <div role="tabpanel" class="tab-pane" id="register">
                                         <div class="col-xxs-12 col-xs-12 mt">
                                             <div class="input-field">
-                                                <label for="from">Username</label>
+                                                <label for="from">Username</label> {{user.username}}
                                                 <input type="text" class="form-control" id="from-place"/>
                                             </div>
                                         </div>
                                         <div class="col-xxs-12 col-xs-12 mt">
                                             <div class="input-field">
-                                                <label for="from">Email Id</label>
+                                                <label for="from">Email Id</label> {{user.email}}
                                                 <input type="text" class="form-control" id="from-place"/>
                                             </div>
                                         </div><div class="col-xxs-12 col-xs-12 mt">

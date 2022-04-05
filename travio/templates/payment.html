@@ -37,14 +37,13 @@
         <div id="fh5co-page">
             {% include 'header.html' %}
 
-            {% for hb in hname %}
             <div class="desc profile-container row">
                <div class="container">
                    <h2>Payment</h2>
                    <div id="fh5co-destination">
                     <div class="tour-fluid">
                         <div class="row">
-                            <form class="col-md-12" action="receipt/{{hb.hotelName}}">
+                            <form class="col-md-12" action="receipt">
                                 {%csrf_token %}
                                 <div role="tabpanel" class="tab-pane" id="register">
                                         <div class="col-xxs-12 col-xs-12 mt">
@@ -82,7 +81,7 @@
                 
                 </div>
             </div>
-            {%endfor%}
+            
         </div>
     </div>
     {% include 'footer.html' %}

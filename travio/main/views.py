@@ -9,85 +9,10 @@ from .models import Package
 from .models import Booking
 from .models import Userdata
 from django.contrib.auth import authenticate, login, logout
-# import itertools
 
 # Create your views here.
-
-def index(request):
-    return render(request, "index.html")
-
 def register(request):
     return render(request,"register.html")
-
-def contact(request):
-    return render(request,"contact.html")
-
-def hotel(request):
-    hotels = Hotel.objects.all()
-    return render(request,'hotel.html',{'hotels':hotels})
-
-def hDetails(request,name):
-    hotel = Hotel.objects.all().filter(hotelId = name)
-    return render(request,'hoteldetails.html',{'hotel':hotel})
-
-def booking(request,hname):
-    book = Hotel.objects.all().filter(hotelName = hname)
-    return render(request,'booking.html',{'book':book})
-
-def vacation(request):
-    return render(request,"vacation.html")
-
-def adventure(request):
-    package = Package.objects.all()
-    return render(request,'adventure.html',{'package':package})
-    # filter(type='Adventure')
-
-def tDetails(request):
-    return render(request,'tourdetails.html')
-
-def profile(request):
-    return render(request,"profilepage.html")
-
-def tHistory(request):
-    return render(request,"tourhistory.html")
-
-class Counter:
-    count = 0
-    id = 0
-
-    @classmethod
-    def incr(self):
-        self.count += 1
-        return self.count
-
-    def __init__(self):
-        self.id = self.incr()
-
-def payment(request,hname):
-    hname = Hotel.objects.all().filter(hotelName = hname)
-    # i = itertools.count()
-    i = Counter().id
-    for hb in hname :
-        name = hb.hotelName
-        price = hb.price
-
-    if request.method == 'POST':
-        fname = request.POST['fname']
-        email = request.POST['email']
-        cnt = request.POST['cnt']
-        people = request.POST['people']
-        tdate = request.POST['tdate']
-        #  Add dynamically userid here
-    
-        hbooking = Booking(i,1,fname,email,cnt,people,tdate,name,price)
-        hbooking.save()
-        print('Booking info added')
-        messages.info(request,'Booking info added')
-    return render(request,"payment.html",{'hname':hname})
-
-def receipt(request,hname):
-    hname = Hotel.objects.all().filter(hotelName = hname)
-    return render(request,"receipt.html",{'hname':hname})
 
 def signup(request):
     if request.method == 'POST':
@@ -104,9 +29,9 @@ def signup(request):
             messages.error(request, "Email Already Registered!!")
             return redirect('Login')
         
-        if len(username)>20:
-            messages.error(request, "Username must be under 20 charcters!!")
-            return redirect('Login')
+        # if len(username)>20:
+        #     messages.error(request, "Username must be under 20 charcters!!")
+        #     return redirect('Login')
         
         if password != cpswd:
             messages.error(request, "Passwords didn't matched!!")
@@ -117,10 +42,8 @@ def signup(request):
             return redirect('Login')
         
         myuser = User.objects.create_user(username,email,password)
-        # myuser.is_active = False
-        # myuser.is_active = True
         myuser.save()
-        messages.success(request, "Your Account has been created succesfully!! Please check your email to confirm your email address in order to activate your account.")
+        messages.success(request, "Your Account has been created succesfully!!")
         return redirect('Login')
 
     #     if password==cpswd:
@@ -139,7 +62,6 @@ def signup(request):
     # else :
     #     return render(request,'register.html')
 
-
 def Login(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -152,6 +74,8 @@ def Login(request):
         if user is not None:
             print("yes")
             login(request,user)
+            if username=="add":
+                return redirect('adminpanel')
             messages.error(request, 'Sucessfully Logged in')
             return redirect('index')
         else:
@@ -160,7 +84,131 @@ def Login(request):
             return redirect('Login')
 
     return redirect('register')
+
+def index(request):
+    return render(request, "index.html")
+
+def contact(request):
+    return render(request,"contact.html")
+
+def adminpanel(request):
+    return render(request,"adminpage.html")
+
+def addtour(request):
+    return render(request,"addtour.html")
+
+def addt(request):
+    if request.method == 'POST':
+        tid = request.POST.get("tourId") 
+        ptitle = request.POST.get("packageTitle")
+        ttype = request.POST.get("type") 
+        img1 = request.POST.get("image1") 
+        img2 = request.POST.get("image2") 
+        tdes = request.POST.get("packageDesc") 
+        d = request.POST.get("duration")
+        price = request.POST.get("disPrice")
+        # ptitle = request.POST['packageTitle'] 
+        # ttype = request.POST['type'] 
+        # img1 = request.POST['image1'] 
+        # img2 = request.POST['image2'] 
+        # tdes = request.POST['packageDesc'] 
+        # d = request.POST['duration'] 
+        # price = request.POST['disPrice'] 
+        
+        tour = Package.objects.create(tourId=tid,packageTitle=ptitle,type=ttype,image1=img1,image2=img2,packageDesc=tdes,duration=d,price=price)
+        tour.save()
+    return redirect('adminpanel')
+
+def hotel(request):
+    hotels = Hotel.objects.all()
+    return render(request,'hotel.html',{'hotels':hotels})
+
+def hDetails(request,name):
+    hotel = Hotel.objects.all().filter(hotelId = name)
+    return render(request,'hoteldetails.html',{'hotel':hotel})
+
+def booking(request,hname):
+    print(hname)
+    if Hotel.objects.filter(hotelName=hname).exists():
+        book = Hotel.objects.all().filter(hotelName = hname)
+        return render(request,'booking.html',{'book':book})
+    else:
+        book = Package.objects.all().filter(packageTitle = hname)
+        return render(request,'booking.html',{'book':book})
+
+def payment(request,hname):
+
+    if Hotel.objects.filter(hotelName=hname).exists():
+        hname = Hotel.objects.all().filter(hotelName = hname)
+        bn = hname.hotelName
+        bfair = hname.price
+        type = 0
+    elif Package.objects.filter(packageTitle=hname).exists():
+        hname = Package.objects.all().filter(packageTitle = hname)
+        bn = hname.packageTitle
+        bfair = hname.bookingFair
+        type = 1
+    else:
+        bfair = 0
+    # hname = Hotel.objects.all().filter(hotelName = hname)
+    # i = Counter().id
+    user = request.user
+
+    if request.method == 'POST':
+        fname = request.POST['fname']
+        email = request.POST['email']
+        cnt = request.POST['cnt']
+        people = request.POST['people']
+        tdate = request.POST['tdate']
+        #  Add dynamically userid here
     
+        hbooking = Booking(uid=user.id,fname=fname,email=email,contact=cnt,people=people,tdate=tdate,bookingName=hname,bookingFair = bfair)
+        hbooking.save()
+        print('Booking info added')
+        messages.info(request,'Booking info added')
+    return render(request,"payment.html",{'hname':hname})
+
+def receipt(request,hname):
+    if Hotel.objects.filter(hotelName=hname).exists():
+        hname = Hotel.objects.all().filter(hotelName = hname)
+        return render(request,'receipt.html')
+    elif Package.objects.filter(packageTitle=hname).exists():
+        hname = Package.objects.all().filter(packageTitle = hname)
+        return render(request,'receipt.html')
+    # return render(request,"receipt.html",{'hname':hname})
+
+def vacation(request):
+    return render(request,"vacation.html")
+
+def adventure(request):
+    package = Package.objects.all()
+    return render(request,'adventure.html',{'package':package})
+    # filter(type='Adventure')
+
+def tDetails(request):
+    return render(request,'tourdetails.html')
+
+def profile(request):
+    user = request.user
+    return render(request,"profilepage.html",{'user':user})
+
+def tHistory(request):
+    return render(request,"tourhistory.html")
+
+# class Counter:
+#     count = 0
+#     id = 0
+
+#     @classmethod
+#     def incr(self):
+#         self.count += 1
+#         return self.count
+
+#     def __init__(self):
+#         self.id = self.incr()
+
+
+
 def Logout(request):
     logout(request)
     messages.success(request, "Logged Out Successfully!!")
