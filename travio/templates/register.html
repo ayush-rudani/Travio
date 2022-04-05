@@ -39,6 +39,14 @@
         <div class="fh5co-cover" data-stellar-background-ratio="0.5"
              style="background-image: url(images/cover_bg_1.jpg);">
             <div class="desc">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    <strong>Message:</strong> {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endfor %}
                 <div class="container">
                     <div class="row">
                         <div class="tabulation animate-box">
@@ -54,11 +62,12 @@
                                 </li>
                             </ul>
 
-                            <!-- Tab panes -->
-                            <form action="login" method="post"  class="tab-pane active" id="login">
-                                {%csrf_token %}
 
-                                <div class="tab-content">
+                            <!-- Tab panes -->
+                            <form action="Login" method="POST">
+                                {% csrf_token %}
+
+                                <div class="tab-content" class="tab-pane active" id="Login">
                                     <div role="tabpanel">
                                         <div class="row">
                                             <div class="col-xxs-12 col-xs-12 mt">
@@ -81,10 +90,10 @@
                                     </div>
                             </form>
                             
-                            <form action="signup" method="post" class="tab-pane" id="register">
-                                {%csrf_token %}
+                            <form action="signup" method="POST">
+                                {% csrf_token %}
 
-                                <div role="tabpanel" >
+                                <div role="tabpanel" class="tab-pane" id="register">
                                     <div class="row">
                                         <div class="col-xxs-12 col-xs-12 mt">
                                             <div class="input-field">

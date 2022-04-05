@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 # from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
@@ -58,9 +59,7 @@ class Package(models.Model):
     discount = models.BooleanField()
 
 class Userdata(models.Model):
-    username = models.CharField(max_length=50)
-    email = models.EmailField()
-    password = models.CharField(max_length=50)
+    userI = models.OneToOneField(User,on_delete=models.CASCADE)
     image = models.CharField(max_length=50,default='tour.jpg')
     address = models.TextField(null=True)
     dob = models.DateField(null=True)

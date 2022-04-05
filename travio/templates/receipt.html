@@ -32,6 +32,18 @@
         }
     </style>
 
+    <script>
+        function printDiv() {
+            var divContents = document.getElementById("print").innerHTML;
+            var a = window.open();
+            // a.document.write('<html>');
+            // a.document.write('<body > <h1>Div contents are <br>');
+            a.document.write(divContents);
+            // a.document.write('</body></html>');
+            a.document.close();
+            a.print();
+        }
+    </script>
 </head>
 <body>
     <div id="fh5co-wrapper">
@@ -39,7 +51,7 @@
             {% include 'header.html' %}
 
             <div id="fh5co-tours" class="fh5co-section-gray">
-                <div class="container">
+                <div class="container" id="print">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
                             <h3>Payment Receipt</h3>
@@ -51,8 +63,8 @@
                         <p>Contact Number : 9313842951</p>
                         <p>Email Id : dhruvisherathiya921@gmail.com</p>
                         <h4>Tour Details</h4>
-                        <p>Package Name : Motorbike Adventure in Ladakh</p>
-                        <p>Tour Type : Adventure</p>
+                        <p>Package Name : </p>
+                        <p>Tour Type : Hotel</p>
                         <p>Tour Duration : 6 Days</p>
                         <h4>Booking Details</h4>
                         <p>Adults : 1  | Children : 0</p>
@@ -60,7 +72,7 @@
                         <p>Total Amount : 17999</p>
                         <p>Booking Date : 31/03/2022</p>
                         <p>Payment Number : 123456</p>
-                        <a class="btn btn-primary btn-outline" href="#">Print</a>
+                        <a class="btn btn-primary btn-outline" href="#" onclick="printDiv()">Print</a>
                     </div>
                 </div>
             </div>

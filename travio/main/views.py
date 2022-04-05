@@ -2,13 +2,14 @@
 from django.http import HttpResponse
 from django.contrib import messages
 from django.shortcuts import render,redirect
-from django.contrib.auth.models import User,auth
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .models import Hotel
 from .models import Package
-from .models import Userdata
 from .models import Booking
-# from .models import Userc
+from .models import Userdata
+from django.contrib.auth import authenticate, login, logout
+# import itertools
 
 # Create your views here.
 
@@ -25,12 +26,10 @@ def hotel(request):
     hotels = Hotel.objects.all()
     return render(request,'hotel.html',{'hotels':hotels})
 
-@login_required(login_url='/login')
 def hDetails(request,name):
     hotel = Hotel.objects.all().filter(hotelId = name)
     return render(request,'hoteldetails.html',{'hotel':hotel})
 
-@login_required(login_url='/login')
 def booking(request,hname):
     book = Hotel.objects.all().filter(hotelName = hname)
     return render(request,'booking.html',{'book':book})
@@ -52,10 +51,22 @@ def profile(request):
 def tHistory(request):
     return render(request,"tourhistory.html")
 
-@login_required(login_url='/login')
+class Counter:
+    count = 0
+    id = 0
+
+    @classmethod
+    def incr(self):
+        self.count += 1
+        return self.count
+
+    def __init__(self):
+        self.id = self.incr()
+
 def payment(request,hname):
     hname = Hotel.objects.all().filter(hotelName = hname)
-
+    # i = itertools.count()
+    i = Counter().id
     for hb in hname :
         name = hb.hotelName
         price = hb.price
@@ -67,15 +78,16 @@ def payment(request,hname):
         people = request.POST['people']
         tdate = request.POST['tdate']
         #  Add dynamically userid here
-        hbooking = Booking(1,1,fname,email,cnt,people,tdate,name,price)
+    
+        hbooking = Booking(i,1,fname,email,cnt,people,tdate,name,price)
         hbooking.save()
         print('Booking info added')
         messages.info(request,'Booking info added')
+    return render(request,"payment.html",{'hname':hname})
 
-    return render(request,"payment.html")
-
-def receipt(request):
-    return render(request,"receipt.html")
+def receipt(request,hname):
+    hname = Hotel.objects.all().filter(hotelName = hname)
+    return render(request,"receipt.html",{'hname':hname})
 
 def signup(request):
     if request.method == 'POST':
@@ -84,40 +96,74 @@ def signup(request):
         password = request.POST['password']
         cpswd = request.POST['cpswd']
 
-        if password==cpswd:
-            if Userdata.objects.filter(username=username).exists():
-                print('Username already taken')
-                messages.info(request,'Username already taken')
-            elif Userdata.objects.filter(email=email).exists(): 
-                print('Email already taken')
-                messages.info(request,'Email already taken')
-            else :
-                user = Userdata.objects.create(username=username,email=email,password=password)
-                user.save()
-                print('user created')
-                messages.info(request,'Registration successfull!!')
-        else :
-            print('PASSWORD NOT MATCHING')
-            messages.info(request,'Both password must be same')
+        if User.objects.filter(username=username):
+            messages.error(request, "Username already exist! Please try some other username.")
+            return redirect('Login')
+        
+        if User.objects.filter(email=email).exists():
+            messages.error(request, "Email Already Registered!!")
+            return redirect('Login')
+        
+        if len(username)>20:
+            messages.error(request, "Username must be under 20 charcters!!")
+            return redirect('Login')
+        
+        if password != cpswd:
+            messages.error(request, "Passwords didn't matched!!")
+            return redirect('Login')
+        
+        if not username.isalnum():
+            messages.error(request, "Username must be Alpha-Numeric!!")
+            return redirect('Login')
+        
+        myuser = User.objects.create_user(username,email,password)
+        # myuser.is_active = False
+        # myuser.is_active = True
+        myuser.save()
+        messages.success(request, "Your Account has been created succesfully!! Please check your email to confirm your email address in order to activate your account.")
+        return redirect('Login')
 
-        return redirect('/')
-    else :
-        return render(request,'hotel.html')
+    #     if password==cpswd:
+    #         if User.objects.filter(username=username).exists():
+    #             messages.error(request,'Username already taken')
+    #         elif User.objects.filter(email=email).exists(): 
+    #             messages.error(request,'Email already taken')
+    #         else :
+    #             user = User.objects.create(username=username,email=email,password=password)
+    #             user.save()
+    #             messages.error(request,'Registration successfull!!')
+    #     else :
+    #         messages.error(request,'Both password must be same')
+
+    #     return redirect('signup')
+    # else :
+    #     return render(request,'register.html')
 
 
-def login(request):
+def Login(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        user=auth.authenticate(username=username,password=password)
-        if user is not None:
-            auth.login(request,user)
-            return redirect('/')
-        else:
-            messages.error(request,'Invalid Credentials')
-            return redirect('signup')
-    else:
-        return render(request,"register.html")
+        user=authenticate(username=username,password=password)
 
+        print("Before login")
+        print(username,password)
+
+        if user is not None:
+            print("yes")
+            login(request,user)
+            messages.error(request, 'Sucessfully Logged in')
+            return redirect('index')
+        else:
+            print("no")
+            messages.error(request,'Invalid Credentials')
+            return redirect('Login')
+
+    return redirect('register')
+    
+def Logout(request):
+    logout(request)
+    messages.success(request, "Logged Out Successfully!!")
+    return redirect('Login')
         
 

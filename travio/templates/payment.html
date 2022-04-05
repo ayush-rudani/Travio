@@ -36,35 +36,38 @@
     <div id="fh5co-wrapper">
         <div id="fh5co-page">
             {% include 'header.html' %}
+
+            {% for hb in hname %}
             <div class="desc profile-container row">
                <div class="container">
                    <h2>Payment</h2>
                    <div id="fh5co-destination">
                     <div class="tour-fluid">
                         <div class="row">
-                            <form class="col-md-12" action="{%url 'receipt' %}">
+                            <form class="col-md-12" action="receipt/{{hb.hotelName}}">
+                                {%csrf_token %}
                                 <div role="tabpanel" class="tab-pane" id="register">
                                         <div class="col-xxs-12 col-xs-12 mt">
                                             <div class="input-field">
-                                                <label for="from">Name on Card</label>
-                                                <input type="text" class="form-control" id="from-place"/>
+                                                <label for="cname">Name on Card</label>
+                                                <input type="text" class="form-control" id="cname" name="cname"/>
                                             </div>
                                         </div>
                                         <div class="col-xxs-12 col-xs-12 mt">
                                             <div class="input-field">
-                                                <label for="from">Card Number</label>
-                                                <input type="text" class="form-control" id="from-place" placeholder="1234-4567-1234-4567"/>
+                                                <label for="cnum">Card Number</label>
+                                                <input type="text" class="form-control" id="cnum" name="cnum" placeholder="1234-4567-1234-4567"/>
                                             </div>
                                         </div>
                                         <div class="col-xxs-12 col-xs-12 mt">
                                             <div class="input-field">
-                                                <label for="from">CVV</label>
-                                                <input type="text" class="form-control" id="from-place" placeholder="123"/>
+                                                <label for="cvv">CVV</label>
+                                                <input type="text" class="form-control" id="cvv" name="cvv" placeholder="123"/>
                                             </div>
                                         </div><div class="col-xxs-12 col-xs-12 mt">
                                             <div class="input-field">
-                                                <label for="from">Expiry Date</label>
-                                                <input type="text" class="form-control" id="from-place"/>
+                                                <label for="edate">Expiry Date</label>
+                                                <input type="text" class="form-control" id="edate" name="edate"/>
                                             </div>
                                         </div>
                                         <div class="col-xs-12">
@@ -79,6 +82,7 @@
                 
                 </div>
             </div>
+            {%endfor%}
         </div>
     </div>
     {% include 'footer.html' %}

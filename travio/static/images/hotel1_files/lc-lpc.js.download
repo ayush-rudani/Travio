@@ -1,0 +1,777 @@
+try {
+  if (document.referrer.indexOf('mode=amp') !== -1) {
+    window.dataLayer.push({
+      event: 'tvc_lc_lpc_tracking',
+      tvc_lc: 'google / organic',
+      tvc_lpc: 'google / amp',
+      tvc_lc_name: '(not set)',
+      tvc_lpc_name: '(not set)',
+    });
+  } else {
+    if (typeof tvc_readCookie != 'function') {
+      var tvc_readCookie = function(key) {
+        var result;
+        return (result = new RegExp('(?:^|; )' + encodeURIComponent(key) + '=([^;]*)').exec(
+          document.cookie,
+        ))
+          ? decodeURIComponent(result[1])
+          : null;
+      };
+    }
+    if (typeof tvc_queryParameters != 'function') {
+      var tvc_queryParameters = function(key) {
+        var result;
+        return (result = new RegExp('(?:\\?|\\&)' + encodeURIComponent(key) + '=([^\\&\\#]*)').exec(
+          window.location.href,
+        ))
+          ? decodeURIComponent(result[1])
+          : null;
+      };
+    }
+    if (typeof tvc_setCookie != 'function') {
+      var tvc_setCookie = function(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+        var expires = 'expires=' + d.toUTCString();
+        document.cookie =
+          cname + '=' + encodeURI(cvalue) + '; ' + expires + '; domain=.goibibo.com; path=/';
+      };
+    }
+    if (typeof tvc_deleteCookie != 'function') {
+      var tvc_deleteCookie = function(name) {
+        document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      };
+    }
+
+    var tvc_session_over = false;
+    var tvc_sess_live = false; //flag for ongoing session
+    var tvc_dl_push = true; //flag for dl push
+    var tvc_session_tracker = {}; //To use the same in refresh code
+    (function() {
+      if (tvc_readCookie('tvc_sess_alive')) {
+        tvc_sess_live = true;
+      }
+      var dt = new Date();
+      dt.setTime(dt.getTime() + 30 * 60 * 1000);
+      var expiry = 'expires=' + dt.toUTCString();
+      document.cookie = 'tvc_sess_alive=' + 1 + '; ' + expiry + '; domain=.goibibo.com; path=/';
+
+      if (tvc_readCookie('tvc_setShoppers')) {
+        var tvc_setShoppers = tvc_readCookie('tvc_setShoppers');
+        document.cookie =
+          'tvc_setShoppers=' + tvc_setShoppers + ';' + expiry + '; domain=.goibibo.com; path=/';
+      } else {
+        document.cookie = 'tvc_setShoppers=0|0|0|0;' + expiry + '; domain=.goibibo.com; path=/';
+      }
+
+      //var tvc_session_tracker = {};
+      var tvc_ga_current_time = new Date();
+      tvc_ga_current_time = tvc_ga_current_time.getTime();
+
+      var tvc_difference;
+      var tvc_sess_cookie = tvc_readCookie('tvc_sess');
+      var tvc_t = 0,
+        tvc_sm;
+      var tvc_ga_referrel_exclusion = [
+        'goibibo.com',
+        'payu.in',
+        'citruspay.com',
+        'razorpay',
+        'premiermiles.co.in',
+        'irctc.co.in',
+        'ibibo.com',
+        'goibibo-com.cdn.ampproject.org',
+        'paypal.com',
+        'icicibank.com',
+        'txncdn.payubiz.in',
+        'securepayments.fssnet.co.in',
+        'net.one97.paytm',
+        'hdfcbank.com',
+        'axisbank.com',
+        'citibank.co.in',
+        'amazonpay.amazon.in',
+        'onlinesbi.com',
+        'enstage-sas.com',
+        'arcot.com',
+        'americanexpress.com',
+        'hsbc.co.in',
+        'thecardservicesonline.com',
+        'enstage.com',
+        'standardchartered.com',
+        'idbibank.com',
+        'isg-3dsecure.in',
+        'yesbank.in',
+        'euronet3dsecure.com',
+        'secure5.arcot.com',
+        'cap.attempts.securecode.com',
+        'cardsecurity.standardchartered.com',
+        'netsafe.hdfcbank.com',
+        'auth2.securtxn.com',
+        'migs.mastercard.co.in',
+        '3dsecure.icicibank.com',
+        'rupay-fsb.enstage-sas.com',
+        'nmdcecom.finacuspayments.com',
+        'hdfcbankpayments.hdfcbank.com',
+        'secure.ccavenue.com',
+        'rupayhash.yappay.in',
+        'allbankonline.in',
+        'acs1.icicibank.com',
+        'csch.enstage-sas.com',
+        'csmu.enstage-sas.com',
+        'acs-safekey.americanexpress.com',
+        'in.amxvpos.com',
+        'in.amxvpos.com',
+        'secure.axisbank.com',
+        'secure1.axisbank.com',
+        'application.axisbank.co.in',
+        'secure-acs2ui-b1-indblr-blrtdc.wibmo.com',
+        'b18-pdc.enstage-sas.com',
+        'b8-pdc.enstage-sas.com',
+        'rupay-can.enstage-sas.com',
+        'citibank.co.in',
+        'acs9-fd.enstage-sas.com',
+        'hdfc-acs.wibmo.com',
+        'secure-acs2ui-b1-indmum-mumrdc.wibmo.com',
+        'rupay-fb.enstage-sas.com',
+        'rupay-bob.enstage-sas.com',
+        'mirupay.enstage-sas.com',
+        'paysecure.yalamanchili.in',
+        'acs.fssnet.co.in',
+        'acs.bankofindia.co.in',
+        'securepayments.andhrabank.in',
+        'tab.syndicatebank.in',
+        'pdc-rup-sb2.enstage-sas.com',
+        'ecom.sarvatra.in',
+        'prdrupayias.insolutionsglobal.com',
+        'dps.fisglobal.com',
+        'redtmprup.enstage-sas.com',
+        'ecom.c-edge.org',
+        'rupbobmpi.enstage-sas.com',
+        'rupbobonus.enstage-sas.com',
+        'ipg.bobgateway.com',
+        'sisainfosec.com',
+        'acs2.onlinesbi.com',
+        'securepayments.fssnet.co.in',
+      ]; // Add exact referral exclusion urls without http/https, www and trailing slash
+      var tvc_ga_referrer = document.referrer
+        ? document.referrer.replace(/(?:http:\/\/|https:\/\/)(?:www.)?([a-zA-Z0-9\.-]*)\/.*/g, '$1')
+        : '';
+      var tvc_ga_current_location = window.location.href;
+      var tvc_ga_referrer_excluded = false;
+      if (tvc_ga_referrer) {
+        if (tvc_ga_referrel_exclusion != undefined) {
+          for (var i = 0; i < tvc_ga_referrel_exclusion.length; i++) {
+            if (tvc_ga_referrer.match(tvc_ga_referrel_exclusion[i])) {
+              tvc_ga_referrer_excluded = true;
+            }
+          }
+        }
+      }
+
+      var tvc_ga_campaign_source = '';
+      var tvc_ga_campaign_medium = '';
+      var tvc_ga_campaign_name = '';
+      var tvc_ga_cookie_source = '';
+      var tvc_ga_cookie_medium = '';
+      var tvc_ga_cookie_name = '';
+      if (tvc_sess_cookie) {
+        tvc_sess_cookie = JSON.parse(tvc_sess_cookie);
+        tvc_t = tvc_sess_cookie.t;
+        tvc_sm = tvc_sess_cookie.sm;
+        tvc_ga_cookie_source = tvc_sm.split(' / ')[0];
+        tvc_ga_cookie_medium = tvc_sm.split(' / ')[1];
+        tvc_ga_cookie_name = tvc_sm.split(' / ')[2] ? tvc_sm.split(' / ')[2] : '(not set)';
+      }
+      if (tvc_queryParameters('gclid') || tvc_queryParameters('gclsrc')) {
+        tvc_ga_campaign_source = 'google';
+        tvc_ga_campaign_medium = tvc_queryParameters('utm_medium')
+          ? tvc_queryParameters('utm_medium')
+          : 'cpc';
+        tvc_ga_campaign_name = tvc_queryParameters('utm_campaign')
+          ? tvc_queryParameters('utm_campaign')
+          : '(not set)';
+      } else if (tvc_queryParameters('utm_source')) {
+        tvc_ga_campaign_source = tvc_queryParameters('utm_source');
+        tvc_ga_campaign_medium = tvc_queryParameters('utm_medium')
+          ? tvc_queryParameters('utm_medium')
+          : '(not set)';
+        tvc_ga_campaign_name = tvc_queryParameters('utm_campaign')
+          ? tvc_queryParameters('utm_campaign')
+          : '(not set)';
+      } else if (tvc_ga_referrer && !tvc_ga_referrer_excluded) {
+        if (
+          tvc_sess_live &&
+          (window.performance.navigation.type == 1 || window.performance.navigation.type == 2)
+        ) {
+          tvc_dl_push = false;
+        } else if (
+          !tvc_sess_live &&
+          (window.performance.navigation.type == 1 || window.performance.navigation.type == 2)
+        ) {
+          tvc_ga_campaign_source = '(direct)';
+          tvc_ga_campaign_medium = '(none)';
+          tvc_ga_campaign_name = '(not set)';
+        } else {
+          if (
+            tvc_ga_referrer.match(
+              /(google\..*|bing.com|ask.com|yahoo.com|msn.com|isearch.babylon.com)/g,
+            )
+          ) {
+            tvc_ga_campaign_source = tvc_ga_referrer.match(
+              /(google|bing|ask|yahoo|msn|babylon)/g,
+            )[0];
+            tvc_ga_campaign_medium = 'organic';
+          } else {
+            tvc_ga_campaign_source = decodeURIComponent(tvc_ga_referrer);
+            tvc_ga_campaign_medium = 'referral';
+          }
+          tvc_ga_campaign_name = '(not set)';
+        }
+      } else {
+        if (tvc_ga_cookie_source && tvc_ga_cookie_medium) {
+          tvc_ga_campaign_source = tvc_ga_cookie_source;
+          tvc_ga_campaign_medium = tvc_ga_cookie_medium;
+          tvc_ga_campaign_name = tvc_ga_cookie_name;
+        } else {
+          tvc_ga_campaign_source = '(direct)';
+          tvc_ga_campaign_medium = '(none)';
+          tvc_ga_campaign_name = '(not set)';
+        }
+      }
+      if (!isNaN(tvc_t)) {
+        tvc_t = parseInt(tvc_t);
+        tvc_difference = Math.ceil((tvc_ga_current_time - tvc_t) / 1000);
+        tvc_difference =
+          Math.floor(tvc_difference / 60) + (tvc_difference % 60 ? tvc_difference % 60 : 1) / 100;
+        if (tvc_difference > 29.6) {
+          tvc_session_tracker['sm'] =
+            tvc_ga_campaign_source + ' / ' + tvc_ga_campaign_medium + ' / ' + tvc_ga_campaign_name;
+          tvc_session_tracker['t'] = tvc_ga_current_time;
+          if (tvc_dl_push) tvc_setCookie('tvc_sess', JSON.stringify(tvc_session_tracker), 30);
+          tvc_session_over = true;
+          return;
+        } else if (
+          tvc_ga_cookie_source + ' / ' + tvc_ga_cookie_medium + ' / ' + tvc_ga_cookie_name !=
+          tvc_ga_campaign_source + ' / ' + tvc_ga_campaign_medium + ' / ' + tvc_ga_campaign_name
+        ) {
+          tvc_session_tracker['sm'] =
+            tvc_ga_campaign_source + ' / ' + tvc_ga_campaign_medium + ' / ' + tvc_ga_campaign_name;
+          tvc_session_tracker['t'] = tvc_ga_current_time;
+          if (tvc_dl_push) tvc_setCookie('tvc_sess', JSON.stringify(tvc_session_tracker), 30);
+          document.cookie = 'tvc_setShoppers=0|0|0|0;' + expiry + '; domain=.goibibo.com; path=/';
+          tvc_session_over = true;
+          return;
+        }
+      }
+
+      tvc_session_tracker['sm'] =
+        tvc_ga_campaign_source + ' / ' + tvc_ga_campaign_medium + ' / ' + tvc_ga_campaign_name;
+      tvc_session_tracker['t'] = tvc_ga_current_time;
+      if (tvc_dl_push) tvc_setCookie('tvc_sess', JSON.stringify(tvc_session_tracker), 30);
+      if (tvc_t) {
+        tvc_session_over = false;
+      } else {
+        tvc_session_over = true;
+      }
+      return;
+    })();
+
+    if (tvc_session_over == true) {
+      var tvc_referrel_exclusion = [
+        'goibibo.com',
+        'payu.in',
+        'citruspay.com',
+        'razorpay',
+        'premiermiles.co.in',
+        'irctc.co.in',
+        'ibibo.com',
+        'goibibo-com.cdn.ampproject.org',
+        'paypal.com',
+        'icicibank.com',
+        'txncdn.payubiz.in',
+        'securepayments.fssnet.co.in',
+        'net.one97.paytm',
+        'hdfcbank.com',
+        'axisbank.com',
+        'citibank.co.in',
+        'amazonpay.amazon.in',
+        'onlinesbi.com',
+        'enstage-sas.com',
+        'arcot.com',
+        'americanexpress.com',
+        'hsbc.co.in',
+        'thecardservicesonline.com',
+        'enstage.com',
+        'standardchartered.com',
+        'idbibank.com',
+        'isg-3dsecure.in',
+        'yesbank.in',
+        'euronet3dsecure.com',
+        'secure5.arcot.com',
+        'cap.attempts.securecode.com',
+        'cardsecurity.standardchartered.com',
+        'netsafe.hdfcbank.com',
+        'auth2.securtxn.com',
+        'migs.mastercard.co.in',
+        '3dsecure.icicibank.com',
+        'rupay-fsb.enstage-sas.com',
+        'nmdcecom.finacuspayments.com',
+        'hdfcbankpayments.hdfcbank.com',
+        'secure.ccavenue.com',
+        'rupayhash.yappay.in',
+        'allbankonline.in',
+        'acs1.icicibank.com',
+        'csch.enstage-sas.com',
+        'csmu.enstage-sas.com',
+        'acs-safekey.americanexpress.com',
+        'in.amxvpos.com',
+        'in.amxvpos.com',
+        'secure.axisbank.com',
+        'secure1.axisbank.com',
+        'application.axisbank.co.in',
+        'secure-acs2ui-b1-indblr-blrtdc.wibmo.com',
+        'b18-pdc.enstage-sas.com',
+        'b8-pdc.enstage-sas.com',
+        'rupay-can.enstage-sas.com',
+        'citibank.co.in',
+        'acs9-fd.enstage-sas.com',
+        'hdfc-acs.wibmo.com',
+        'secure-acs2ui-b1-indmum-mumrdc.wibmo.com',
+        'rupay-fb.enstage-sas.com',
+        'rupay-bob.enstage-sas.com',
+        'mirupay.enstage-sas.com',
+        'paysecure.yalamanchili.in',
+        'acs.fssnet.co.in',
+        'acs.bankofindia.co.in',
+        'securepayments.andhrabank.in',
+        'tab.syndicatebank.in',
+        'pdc-rup-sb2.enstage-sas.com',
+        'ecom.sarvatra.in',
+        'prdrupayias.insolutionsglobal.com',
+        'dps.fisglobal.com',
+        'redtmprup.enstage-sas.com',
+        'ecom.c-edge.org',
+        'rupbobmpi.enstage-sas.com',
+        'rupbobonus.enstage-sas.com',
+        'ipg.bobgateway.com',
+        'sisainfosec.com',
+        'acs2.onlinesbi.com',
+        'securepayments.fssnet.co.in',
+      ]; // Add exact referral exclusion urls without http/https, www and trailing slash
+      var tvc_paid_campaigns = [
+        'Tripadvisor_DH',
+        'Tripadvisor_IH',
+        'Trivago_DH',
+        'Trivago_IH',
+        'Skyscanner',
+        'Kayak',
+        'Ixigo',
+        'cpc_hpa',
+        'Criteo',
+        'Twitter',
+        'Paid',
+        'Facebook',
+        'Remarketing',
+        'DisplayAffiliate',
+        'Display',
+        'affiliates',
+        'Vizury',
+        'cpm',
+        'IRCTC_Premium_Partner',
+        'irctc_premium_partner',
+      ];
+      var tvc_campaign_timeout = 30; // Campaign Expiry in Days
+      var ls_campaign_timeout = 1; //Campaign Expiry in Days for lpc24
+      var ls_7daycampaign_timeout = 7; //Campaign Expiry in Days for lpc7
+      var tvc_referrer = document.referrer
+        ? document.referrer.replace(/(?:http:\/\/|https:\/\/)(?:www.)?([a-zA-Z0-9\.-]*)\/.*/g, '$1')
+        : '';
+      var tvc_referrer_excluded = false;
+      if (tvc_referrer) {
+        for (var i = 0; i < tvc_referrel_exclusion.length; i++) {
+          if (tvc_referrer.match(tvc_referrel_exclusion[i])) {
+            tvc_referrer_excluded = true;
+          }
+        }
+      }
+      var tvc_current_location = window.location.href;
+      var tvc_lc_campaign, tvc_lpc_campaign, ls_lpc_campaign;
+      var tvc_campaign_source = 'NA';
+      var tvc_campaign_medium = 'NA';
+      var tvc_campaign_name = tvc_queryParameters('utm_campaign')
+        ? tvc_queryParameters('utm_campaign')
+        : '(not set)';
+      var tvc_cookie_source = 'NA';
+      var tvc_cookie_medium = 'NA';
+      var tvc_cookie_name = 'NA';
+      var tvc_SM_cookie = tvc_readCookie('tvc_sm_lpc');
+      var tvc_sanitize_counter = 0;
+      var tvc_ga_current_time = new Date();
+      tvc_ga_current_time = tvc_ga_current_time.getTime();
+
+      if (tvc_SM_cookie) {
+        while (tvc_SM_cookie.match('%')) {
+          if (tvc_sanitize_counter < 100) {
+            tvc_SM_cookie = decodeURIComponent(tvc_SM_cookie);
+          } else {
+            break;
+          }
+          tvc_sanitize_counter++;
+        }
+        tvc_cookie_source = tvc_SM_cookie.split(' / ')[0];
+        tvc_cookie_medium = tvc_SM_cookie.split(' / ')[1];
+        tvc_cookie_name = tvc_SM_cookie.split(' / ')[2]
+          ? tvc_SM_cookie.split(' / ')[2]
+          : '(not set)';
+        tvc_cookie_name = tvc_cookie_name == 'undefined' ? '(not set)' : tvc_cookie_name;
+
+        if (typeof tvc_cookie_medium == 'undefined') {
+          tvc_cookie_source = 'not_set';
+          tvc_cookie_medium = 'not_set';
+          tvc_cookie_name = '(not set)';
+        }
+        if (document.cookie.match(/tvc_sm_lpc/g)) {
+          if (document.cookie.match(/tvc_sm_lpc/g).length > 1) {
+            tvc_deleteCookie('tvc_sm_lpc');
+          }
+        }
+      }
+      //variable for lpc24
+      var ls_campaign_source = 'NA';
+      var ls_campaign_medium = 'NA';
+      var ls_campaign_name = tvc_queryParameters('utm_campaign')
+        ? tvc_queryParameters('utm_campaign')
+        : '(not set)';
+      var ls_cookie_source = 'NA';
+      var ls_cookie_medium = 'NA';
+      var ls_cookie_name = 'NA';
+      var ls_SM_cookie = tvc_readCookie('ls_sm_lpc24');
+      var ls_sanitize_counter = 0;
+
+      if (ls_SM_cookie) {
+        while (ls_SM_cookie.match('%')) {
+          if (ls_sanitize_counter < 100) {
+            ls_SM_cookie = decodeURIComponent(ls_SM_cookie);
+          } else {
+            break;
+          }
+          ls_sanitize_counter++;
+        }
+        ls_cookie_source = ls_SM_cookie.split(' / ')[0];
+        ls_cookie_medium = ls_SM_cookie.split(' / ')[1];
+        ls_cookie_name = ls_SM_cookie.split(' / ')[2] ? ls_SM_cookie.split(' / ')[2] : '(not set)';
+        ls_cookie_name = tvc_cookie_name == 'undefined' ? '(not set)' : tvc_cookie_name;
+        if (typeof ls_cookie_medium == 'undefined') {
+          ls_cookie_source = 'not_set';
+          ls_cookie_medium = 'not_set';
+          ls_cookie_name = '(not set)';
+        }
+
+        if (document.cookie.match(/ls_sm_lpc24/g)) {
+          if (document.cookie.match(/ls_sm_lpc24/g).length > 1) {
+            tvc_deleteCookie('ls_sm_lpc24');
+          }
+        }
+      }
+
+      //7 day script
+      var ls_7daycampaign_source = 'NA';
+      var ls_7daycampaign_medium = 'NA';
+      var ls_7daycampaign_name = tvc_queryParameters('utm_campaign')
+        ? tvc_queryParameters('utm_campaign')
+        : '(not set)';
+      var ls_7daycookie_source = 'NA';
+      var ls_7daycookie_medium = 'NA';
+      var ls_7daycookie_name = 'NA';
+      var ls_7daySM_cookie = tvc_readCookie('ls_sm_lpc7');
+      var ls_7daysanitize_counter = 0;
+
+      if (ls_7daySM_cookie) {
+        while (ls_7daySM_cookie.match('%')) {
+          if (ls_7daysanitize_counter < 100) {
+            ls_7daySM_cookie = decodeURIComponent(ls_7daySM_cookie);
+          } else {
+            break;
+          }
+          ls_7daysanitize_counter++;
+        }
+        ls_7daycookie_source = ls_7daySM_cookie.split(' / ')[0];
+        ls_7daycookie_medium = ls_7daySM_cookie.split(' / ')[1];
+        ls_7daycookie_name = ls_7daySM_cookie.split(' / ')[2]
+          ? ls_7daySM_cookie.split(' / ')[2]
+          : '(not set)';
+        ls_7daycookie_name = ls_7daycookie_name == 'undefined' ? '(not set)' : ls_7daycookie_name;
+
+        if (typeof ls_7daycookie_medium == 'undefined') {
+          ls_7daycookie_source = 'not_set';
+          ls_7daycookie_medium = 'not_set';
+          ls_7daycookie_name = '(not set)';
+        }
+        if (document.cookie.match(/ls_sm_lpc7/g)) {
+          if (document.cookie.match(/ls_sm_lpc7/g).length > 1) {
+            tvc_deleteCookie('ls_sm_lpc7');
+          }
+        }
+      }
+
+      if (tvc_queryParameters('gclid') || tvc_queryParameters('gclsrc')) {
+        tvc_campaign_source = 'google';
+        tvc_campaign_medium = tvc_queryParameters('utm_medium')
+          ? tvc_queryParameters('utm_medium')
+          : 'cpc';
+        tvc_lc_campaign =
+          tvc_campaign_source + ' / ' + tvc_campaign_medium + ' / ' + tvc_campaign_name;
+        tvc_lpc_campaign =
+          tvc_campaign_source + ' / ' + tvc_campaign_medium + ' / ' + tvc_campaign_name;
+        ls_lpc_campaign =
+          tvc_campaign_source + ' / ' + tvc_campaign_medium + ' / ' + tvc_campaign_name;
+        ls_lpc7_campaign =
+          tvc_campaign_source + ' / ' + tvc_campaign_medium + ' / ' + tvc_campaign_name;
+
+        tvc_setCookie('tvc_sm_lpc', tvc_lpc_campaign, tvc_campaign_timeout);
+        tvc_setCookie('ls_sm_lpc24', ls_lpc_campaign, ls_campaign_timeout);
+        tvc_setCookie('ls_sm_lpc7', ls_lpc7_campaign, ls_7daycampaign_timeout);
+      } else if (tvc_queryParameters('utm_source')) {
+        tvc_campaign_source = tvc_queryParameters('utm_source');
+        tvc_campaign_medium = tvc_queryParameters('utm_medium')
+          ? tvc_queryParameters('utm_medium')
+          : 'not_set';
+        tvc_lc_campaign =
+          tvc_campaign_source + ' / ' + tvc_campaign_medium + ' / ' + tvc_campaign_name;
+
+        var ls_re = new RegExp(tvc_campaign_medium, 'i');
+        var ls_re_cookie = new RegExp(tvc_cookie_medium, 'i');
+        var ls_lpc24_re_cookie = new RegExp(ls_cookie_medium, 'i');
+        var ls_lpc7_re_cookie = new RegExp(ls_7daycookie_medium, 'i');
+
+        if (ls_re.test(tvc_paid_campaigns.join(','))) {
+          tvc_lpc_campaign =
+            tvc_campaign_source + ' / ' + tvc_campaign_medium + ' / ' + tvc_campaign_name;
+          ls_lpc_campaign =
+            tvc_campaign_source + ' / ' + tvc_campaign_medium + ' / ' + tvc_campaign_name;
+          ls_lpc7_campaign =
+            tvc_campaign_source + ' / ' + tvc_campaign_medium + ' / ' + tvc_campaign_name;
+
+          tvc_setCookie('tvc_sm_lpc', tvc_lpc_campaign, tvc_campaign_timeout);
+          tvc_setCookie('ls_sm_lpc24', ls_lpc_campaign, ls_campaign_timeout);
+          tvc_setCookie('ls_sm_lpc7', ls_lpc7_campaign, ls_7daycampaign_timeout);
+        } else if (ls_lpc24_re_cookie.test(tvc_paid_campaigns.join(','))) {
+          ls_lpc_campaign = ls_cookie_source + ' / ' + ls_cookie_medium + ' / ' + ls_cookie_name;
+          tvc_setCookie('ls_sm_lpc24', ls_lpc_campaign, ls_campaign_timeout);
+
+          tvc_lpc_campaign =
+            tvc_cookie_source + ' / ' + tvc_cookie_medium + ' / ' + tvc_cookie_name;
+          ls_lpc7_campaign =
+            ls_7daycookie_source + ' / ' + ls_7daycookie_medium + ' / ' + ls_7daycookie_name;
+        } else if (ls_lpc7_re_cookie.test(tvc_paid_campaigns.join(','))) {
+          ls_lpc7_campaign =
+            ls_7daycookie_source + ' / ' + ls_7daycookie_medium + ' / ' + ls_7daycookie_name;
+          tvc_setCookie('ls_sm_lpc7', ls_lpc7_campaign, ls_7daycampaign_timeout);
+          tvc_lpc_campaign =
+            tvc_cookie_source + ' / ' + tvc_cookie_medium + ' / ' + tvc_cookie_name;
+          ls_lpc_campaign = ls_cookie_source + ' / ' + ls_cookie_medium + ' / ' + ls_cookie_name;
+        } else if (ls_re_cookie.test(tvc_paid_campaigns.join(','))) {
+          tvc_lpc_campaign =
+            tvc_cookie_source + ' / ' + tvc_cookie_medium + ' / ' + tvc_cookie_name;
+        } else {
+          tvc_campaign_source = 'not_set';
+          tvc_campaign_medium = 'not_set';
+          tvc_lpc_campaign =
+            tvc_campaign_source + ' / ' + tvc_campaign_medium + ' / ' + tvc_campaign_name;
+          tvc_setCookie('tvc_sm_lpc', tvc_lpc_campaign, tvc_campaign_timeout);
+          ls_lpc_campaign =
+            tvc_campaign_source + ' / ' + tvc_campaign_medium + ' / ' + tvc_campaign_name;
+          tvc_setCookie('ls_sm_lpc24', ls_lpc_campaign, ls_campaign_timeout);
+          ls_lpc7_campaign =
+            tvc_campaign_source + ' / ' + tvc_campaign_medium + ' / ' + tvc_campaign_name;
+          tvc_setCookie('ls_sm_lpc7', ls_lpc7_campaign, ls_7daycampaign_timeout);
+        }
+        if (!ls_lpc_campaign || ls_lpc_campaign.includes('NA')) {
+          ls_campaign_source = 'not_set';
+          ls_campaign_medium = 'not_set';
+          ls_lpc_campaign =
+            ls_campaign_source + ' / ' + ls_campaign_medium + ' / ' + ls_campaign_name;
+          tvc_setCookie('ls_sm_lpc24', ls_lpc_campaign, ls_campaign_timeout);
+        }
+
+        if (!ls_lpc7_campaign || ls_lpc7_campaign.includes('NA')) {
+          ls_7daycampaign_source = 'not_set';
+          ls_7daycampaign_medium = 'not_set';
+          ls_lpc7_campaign =
+            ls_7daycampaign_source + ' / ' + ls_7daycampaign_medium + ' / ' + ls_7daycampaign_name;
+          tvc_setCookie('ls_sm_lpc7', ls_lpc7_campaign, ls_7daycampaign_timeout);
+        }
+      } else if (tvc_referrer && !tvc_referrer_excluded) {
+        if (
+          tvc_sess_live &&
+          (window.performance.navigation.type == 1 || window.performance.navigation.type == 2)
+        ) {
+          tvc_dl_push = false;
+        } else if (
+          !tvc_sess_live &&
+          (window.performance.navigation.type == 1 || window.performance.navigation.type == 2)
+        ) {
+          tvc_campaign_source = '(direct)';
+          tvc_campaign_medium = '(none)';
+          tvc_campaign_name = '(not set)';
+          tvc_lc_campaign =
+            tvc_campaign_source + ' / ' + tvc_campaign_medium + ' / ' + tvc_campaign_name;
+        } else {
+          if (
+            tvc_referrer.match(
+              /(google\..*|bing.com|ask.com|yahoo.com|msn.com|isearch.babylon.com|rambler.ru|baidu.com|yandex.com|aol.com|go.mail.ru|search.seznam.cz|sogou.com|so.com|search.incredimail.com|search.smt.docomo.ne.jp|search.centrum.cz)/g,
+            )
+          ) {
+            tvc_campaign_source = tvc_referrer.match(
+              /(google|bing|ask|yahoo|msn|babylon|rambler|baidu|yandex|aol|go.mail.ru|seznam|sogou|so.com|incredimail|search.smt.docomo|centrum.cz)/g,
+            )[0];
+            tvc_campaign_medium = 'organic';
+            tvc_lc_campaign =
+              tvc_campaign_source + ' / ' + tvc_campaign_medium + ' / ' + tvc_campaign_name;
+          } else {
+            tvc_campaign_source = decodeURIComponent(tvc_referrer);
+            tvc_campaign_medium = 'referral';
+            tvc_lc_campaign =
+              tvc_campaign_source + ' / ' + tvc_campaign_medium + ' / ' + tvc_campaign_name;
+            tvc_session_tracker['sm'] =
+              tvc_campaign_source + ' / ' + tvc_campaign_medium + ' / ' + tvc_campaign_name;
+            tvc_session_tracker['t'] = tvc_ga_current_time;
+            if (tvc_dl_push) tvc_setCookie('tvc_sess', JSON.stringify(tvc_session_tracker), 30); //Added for cookie set
+          }
+        }
+
+        var ls_re_cookie = new RegExp(tvc_cookie_medium, 'i');
+        var ls_lpc24_re_cookie = new RegExp(ls_cookie_medium, 'i');
+        var ls_lpc7_re_cookie = new RegExp(ls_7daycookie_medium, 'i');
+
+        if (ls_re_cookie.test(tvc_paid_campaigns.join(','))) {
+          tvc_lpc_campaign =
+            tvc_cookie_source + ' / ' + tvc_cookie_medium + ' / ' + tvc_cookie_name;
+          // tvc_setCookie('tvc_sm_lpc', tvc_lpc_campaign, tvc_campaign_timeout);
+        } else {
+          tvc_campaign_source = 'not_set';
+          tvc_campaign_medium = 'not_set';
+          tvc_lpc_campaign =
+            tvc_campaign_source + ' / ' + tvc_campaign_medium + ' / ' + tvc_campaign_name;
+          tvc_setCookie('tvc_sm_lpc', tvc_lpc_campaign, tvc_campaign_timeout);
+        }
+        //lpc24
+        if (ls_lpc24_re_cookie.test(tvc_paid_campaigns.join(','))) {
+          ls_lpc_campaign = ls_cookie_source + ' / ' + ls_cookie_medium + ' / ' + ls_cookie_name;
+          tvc_setCookie('ls_sm_lpc24', ls_lpc_campaign, ls_campaign_timeout);
+        } else {
+          ls_campaign_source = 'not_set';
+          ls_campaign_medium = 'not_set';
+          ls_lpc_campaign =
+            ls_campaign_source + ' / ' + ls_campaign_medium + ' / ' + ls_campaign_name;
+          tvc_setCookie('ls_sm_lpc24', ls_lpc_campaign, ls_campaign_timeout);
+        }
+
+        //lpc7
+        if (ls_lpc7_re_cookie.test(tvc_paid_campaigns.join(','))) {
+          ls_lpc7_campaign =
+            ls_7daycookie_source + ' / ' + ls_7daycookie_medium + ' / ' + ls_7daycookie_name;
+          tvc_setCookie('ls_sm_lpc7', ls_lpc7_campaign, ls_7daycampaign_timeout);
+        } else {
+          ls_7daycampaign_source = 'not_set';
+          ls_7daycampaign_medium = 'not_set';
+          ls_lpc7_campaign =
+            ls_7daycampaign_source + ' / ' + ls_7daycampaign_medium + ' / ' + ls_7daycampaign_name;
+          tvc_setCookie('ls_sm_lpc7', ls_lpc7_campaign, ls_7daycampaign_timeout);
+        }
+      } else {
+        tvc_campaign_source = '(direct)';
+        tvc_campaign_medium = '(none)';
+        tvc_lc_campaign =
+          tvc_campaign_source + ' / ' + tvc_campaign_medium + ' / ' + tvc_campaign_name;
+        var ls_re_cookie = new RegExp(tvc_cookie_medium, 'i');
+        var ls_lpc24_re_cookie = new RegExp(ls_cookie_medium, 'i');
+        var ls_lpc7_re_cookie = new RegExp(ls_7daycookie_medium, 'i');
+
+        if (ls_lpc24_re_cookie.test(tvc_paid_campaigns.join(','))) {
+          ls_lpc_campaign = ls_cookie_source + ' / ' + ls_cookie_medium + ' / ' + ls_cookie_name;
+          tvc_lpc_campaign =
+            tvc_cookie_source + ' / ' + tvc_cookie_medium + ' / ' + tvc_cookie_name;
+          ls_lpc7_campaign =
+            ls_7daycookie_source + ' / ' + ls_7daycookie_medium + ' / ' + ls_7daycookie_name;
+        } else if (ls_lpc7_re_cookie.test(tvc_paid_campaigns.join(','))) {
+          ls_lpc_campaign = ls_cookie_source + ' / ' + ls_cookie_medium + ' / ' + ls_cookie_name;
+          ls_lpc7_campaign =
+            ls_7daycookie_source + ' / ' + ls_7daycookie_medium + ' / ' + ls_7daycookie_name;
+          tvc_lpc_campaign =
+            tvc_cookie_source + ' / ' + tvc_cookie_medium + ' / ' + tvc_cookie_name;
+        } else if (ls_re_cookie.test(tvc_paid_campaigns.join(','))) {
+          tvc_lpc_campaign =
+            tvc_cookie_source + ' / ' + tvc_cookie_medium + ' / ' + tvc_cookie_name;
+        } else {
+          tvc_campaign_source = 'not_set';
+          tvc_campaign_medium = 'not_set';
+          tvc_lpc_campaign =
+            tvc_campaign_source + ' / ' + tvc_campaign_medium + ' / ' + tvc_campaign_name;
+          tvc_setCookie('tvc_sm_lpc', tvc_lpc_campaign, tvc_campaign_timeout);
+
+          ls_lpc_campaign =
+            tvc_campaign_source + ' / ' + tvc_campaign_medium + ' / ' + tvc_campaign_name;
+          tvc_setCookie('ls_sm_lpc24', ls_lpc_campaign, ls_campaign_timeout);
+
+          ls_lpc7_campaign =
+            tvc_campaign_source + ' / ' + tvc_campaign_medium + ' / ' + tvc_campaign_name;
+          tvc_setCookie('ls_sm_lpc7', ls_lpc7_campaign, ls_7daycampaign_timeout);
+        }
+
+        //lpc24
+        if (!ls_lpc_campaign || ls_lpc_campaign.includes('NA')) {
+          ls_campaign_source = 'not_set';
+          ls_campaign_medium = 'not_set';
+          ls_lpc_campaign =
+            ls_campaign_source + ' / ' + ls_campaign_medium + ' / ' + ls_campaign_name;
+          tvc_setCookie('ls_sm_lpc24', ls_lpc_campaign, ls_campaign_timeout);
+        }
+        //lpc7
+        if (!ls_lpc7_campaign || ls_lpc7_campaign.includes('NA')) {
+          ls_7daycampaign_source = 'not_set';
+          ls_7daycampaign_medium = 'not_set';
+          ls_lpc7_campaign =
+            ls_7daycampaign_source + ' / ' + ls_7daycampaign_medium + ' / ' + ls_7daycampaign_name;
+          tvc_setCookie('ls_sm_lpc7', ls_lpc7_campaign, ls_7daycampaign_timeout);
+        }
+      }
+      tvc_lpc_campaign = tvc_lpc_campaign.match(/^not_set \/ not_set.*/g)
+        ? tvc_lc_campaign
+        : tvc_lpc_campaign;
+      ls_lpc_campaign = ls_lpc_campaign.match(/^not_set \/ not_set.*/g)
+        ? tvc_lc_campaign
+        : ls_lpc_campaign;
+      ls_lpc7_campaign = ls_lpc7_campaign.match(/^not_set \/ not_set.*/g)
+        ? tvc_lc_campaign
+        : ls_lpc7_campaign;
+
+      if (document.location.pathname.indexOf('/fb/fb-auth/') == -1) {
+        if (tvc_dl_push) {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'tvc_lc_lpc_tracking',
+            tvc_lc: tvc_lc_campaign.split(' / ')[0] + ' / ' + tvc_lc_campaign.split(' / ')[1],
+            tvc_lpc: tvc_lpc_campaign.split(' / ')[0] + ' / ' + tvc_lpc_campaign.split(' / ')[1],
+            tvc_lpc24: ls_lpc_campaign.split(' / ')[0] + ' / ' + ls_lpc_campaign.split(' / ')[1],
+            tvc_lpc7: ls_lpc7_campaign.split(' / ')[0] + ' / ' + ls_lpc7_campaign.split(' / ')[1],
+            tvc_lc_name: tvc_lc_campaign.split(' / ')[2],
+            tvc_lpc_name: tvc_lpc_campaign.split(' / ')[2],
+            tvc_lpc24_name: ls_lpc_campaign.split(' / ')[2],
+            tvc_lpc7_name: ls_lpc7_campaign.split(' / ')[2],
+          });
+        }
+      }
+    }
+  }
+} catch (e) {
+  // Custom LC & LPC model error
+  window.dataLayer = window.dataLayer || [];
+  dataLayer.push({
+    event: 'tvc_error_occurred',
+    tvc_error: e.message,
+    tvc_page: window.location.href,
+    tvc_tag: 'lc_lpc_script_hotel',
+    tvc_timestamp: new Date().toString(),
+  });
+}
