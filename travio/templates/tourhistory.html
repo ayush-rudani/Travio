@@ -54,18 +54,14 @@
                           </tr>
                         </thead>
                         <tbody>
+                          {% for h in history %} 
                           <tr>
-                            <th scope="row">Motorbike Adventure in Ladakh</th>
-                            <td>17999</td>
-                            <td>31-03-2022</td>
-                            <td>Package</td>
+                            <th scope="row">{{h.bookingName}}</th>
+                            <td>{{h.bookingFair}}</td>
+                            <td>{{h.tdate}}</td>
+                            <td>#</td>
                           </tr>
-                          <tr>
-                            <th scope="row">Sterling Mount Abu</th>
-                            <td>8870</td>
-                            <td>1-04-2000</td>
-                            <td>Hotel</td>
-                          </tr>
+                          {% endfor %}
                         </tbody>
                       </table>
                 </div>
