@@ -25,4 +25,8 @@ urlpatterns = [
     path('adminpanel',views.adminpanel,name="adminpanel"),
     path('addtour',views.addtour,name="addtour"),
     path('addt',views.addt,name="addt"),
+    path('viewtour', views.viewtour, name="viewtour"),
+    path('viewuser', views.viewuser, name="viewuser"),
+    path('addhotel', views.addhotel, name="addhoetl"),
+    path('addh', views.addh, name="addh"),
 ]
