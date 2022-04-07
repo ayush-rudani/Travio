@@ -11,7 +11,11 @@ urlpatterns = [
     path('hDetails/<str:hid>', views.hDetails, name="hDetails"),
     path('hDetails/booking/<str:hname>', views.booking, name="booking"),
     path('hDetails/booking/payment/<str:hname>', views.payment, name="payment"),
-    path('hDetails/booking/payment/receipt/<str:hname>', views.receipt, name="receipt"),
+    # path('hDetails/booking/payment/<str:hname>', views.showPayNowPage, name="showPayNowPage"),
+    path('hDetails/booking/payment/receipt/<str:hname>',
+         views.receipt, name="receipt"),
+    # path('hDetails/booking/payment/receipt/<str:hname>', views.showReceipt, name="showReceipt"),
+
     path('vacation', views.vacation, name="vacation"),
     path('adventure', views.adventure, name="adventure"),
     path('tDetails', views.tDetails, name="tDetails"),
@@ -21,8 +25,11 @@ urlpatterns = [
     path('receipt', views.receipt, name="receipt"),
     path('contact', views.contact, name="contact"),
     path('Logout', views.Logout, name="Logout"),
-
     path('adminpanel', views.adminpanel, name="adminpanel"),
     path('addtour', views.addtour, name="addtour"),
     path('addt', views.addt, name="addt"),
+    path('viewtour', views.viewtour, name="viewtour"),
+    path('viewuser', views.viewuser, name="viewuser"),
+    path('addhotel', views.addhotel, name="addhoetl"),
+    path('addh', views.addh, name="addh"),
 ]

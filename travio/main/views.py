@@ -106,27 +106,52 @@ def addtour(request):
     return render(request, "addtour.html")
 
 
+def addhotel(request):
+    return render(request, "addhotel.html")
+
+
+def viewtour(request):
+    tour = Package.objects.all()
+    return render(request, 'viewtour.html', {'tour': tour})
+
+
+def viewuser(request):
+    user = User.objects.all()
+    return render(request, 'viewuser.html', {'user': user})
+
+
 def addt(request):
     if request.method == 'POST':
-        tid = request.POST.get("tourId")
-        ptitle = request.POST.get("packageTitle")
-        ttype = request.POST.get("type")
-        img1 = request.POST.get("image1")
-        img2 = request.POST.get("image2")
-        tdes = request.POST.get("packageDesc")
-        d = request.POST.get("duration")
-        price = request.POST.get("disPrice")
-        # ptitle = request.POST['packageTitle']
-        # ttype = request.POST['type']
-        # img1 = request.POST['image1']
-        # img2 = request.POST['image2']
-        # tdes = request.POST['packageDesc']
-        # d = request.POST['duration']
-        # price = request.POST['disPrice']
+        tid = request.POST.get("tid")
+        ptitle = request.POST.get("ptitle")
+        ttype = request.POST.get("ttype")
+        img1 = request.POST.get("img1")
+        img2 = request.POST.get("img2")
+        tdes = request.POST.get("tdes")
+        d = request.POST.get("d")
+        price = request.POST.get("price")
 
         tour = Package.objects.create(tourId=tid, packageTitle=ptitle, type=ttype, image1=img1, image2=img2,
                                       packageDesc=tdes, duration=d, price=price)
         tour.save()
+    return redirect('adminpanel')
+
+
+def addh(request):
+    if request.method == 'POST':
+        hotelId = request.POST.get("hotelId")
+        hotelName = request.POST.get("hotelName")
+        city = request.POST.get("city")
+        hotelAddress = request.POST.get("hotelAddress")
+        pincode = request.POST.get("pincode")
+        hotelDesc = request.POST.get("hotelDesc")
+        roomType = request.POST.get("roomType")
+        price = request.POST.get("price")
+        image = request.POST.get("image")
+        status = request.POST.get("status")
+
+        hotel = Hotel.objects.create(hotelId=hotelId, hotelName=hotelName,city=city,hotelAddress=hotelAddress, pincode=pincode,hotelDesc=hotelDesc,roomType=roomType,price=price,image=image,status=status)
+        hotel.save()
     return redirect('adminpanel')
 
 
@@ -142,6 +167,7 @@ def hDetails(request, hid):
 
 # Show booking page
 def booking(request, hname):
+    hname = hname.strip()
     if Hotel.objects.filter(hotelName=hname).exists():
         book = Hotel.objects.all().filter(hotelName=hname)
         return render(request, 'booking.html', {'book': book})
@@ -184,29 +210,56 @@ def payment(request, hname):
     return render(request, "payment.html", {'hname': hname})
 
 
-def showPayNowPage(request, hname):
-    user = request.user
+# def showPayNowPage(request, hname):
+#     if request.method == 'POST':
+#         # fname = request.POST['fname']
+#         # email = request.POST['email']
+#         # cnt = request.POST['cnt']
+#         # people = request.POST['people']
+#         # tdate = request.POST['tdate']
 
-    if request.method == 'POST':
-        # fname = request.POST['fname']
-        # email = request.POST['email']
-        # cnt = request.POST['cnt']
-        # people = request.POST['people']
-        # tdate = request.POST['tdate']
-        context = {}
-        context['fname'] = request.POST['fname']
-        context['email'] = request.POST['email']
-        context['cnt'] = request.POST['cnt']
-        context['people'] = request.POST['people']
-        context['tdate'] = request.POST['tdate']
-        context['hname'] = hname
-        #  Add dynamically userid here
+#         if Hotel.objects.filter(hotelName=hname).exists():
+#             hname = Hotel.objects.all().filter(hotelName=hname)
+#         elif Package.objects.filter(packageTitle=hname).exists():
+#             hname = Package.objects.all().filter(packageTitle=hname)
+#         # hname = hname.strip()
+#         context = {}
+#         context['fname'] = request.POST['fname']
+#         context['email'] = request.POST['email']
+#         context['cnt'] = request.POST['cnt']
+#         context['people'] = request.POST['people']
+#         context['tdate'] = request.POST['tdate']
+#         context['hname'] = hname
+#         request.session['context'] = context
+#         print(hname)
+#         #  Add dynamically userid here
 
-    render(request, "payment.html", context)
+#     render(request, "payment.html", context)
 
 
-def paymentConf(request):
-    
+# def showReceipt(request):
+
+#     if Hotel.objects.filter(hotelName=hname).exists():
+#         hname = Hotel.objects.all().filter(hotelName=hname)
+#     elif Package.objects.filter(packageTitle=hname).exists():
+#         hname = Package.objects.all().filter(packageTitle=hname)
+#     user = request.user
+
+#     print(request.session['context'])
+
+#     context = request.session['context']
+#     cname = request.POST['cname']
+#     cnum = request.POST['cnum']
+#     cvv = request.POST['cvv']
+#     edate = request.POST['edate']
+
+#     hbooking = Booking(uid=user.id, fname=context['fname'], email=context['email'], contact=context['cnt'], people=context['people'], tdate=context['tdate'],
+#                        bookingName=hname.hotelName, bookingFair=context['bfair'])
+
+#     hbooking.save()
+
+#     print('Booking info added')
+#     return render(request, "receipt.html")
 
 
 def receipt(request, hname):

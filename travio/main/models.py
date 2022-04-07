@@ -58,8 +58,8 @@ class Package(models.Model):
     packageDesc = models.TextField()
     duration = models.CharField(max_length=50)
     price = models.IntegerField()
-    disPrice = models.IntegerField()
-    discount = models.BooleanField()
+    disPrice = models.IntegerField(null=True)
+    discount = models.BooleanField(null=True)
 
 
 class Userdata(models.Model):

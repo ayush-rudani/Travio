@@ -1,19 +1,22 @@
 {% load static %}
 {% static "images" as baseUrl %}
-<html class="no-js"> <!--<![endif]-->
+<html class="no-js">
+<!--<![endif]-->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Hotel Details</title>
     {% include 'CSS.html' %}
 </head>
+
 <body>
-<div id="fh5co-wrapper">
-    <div id="fh5co-page">
+    <div id="fh5co-wrapper">
+        <div id="fh5co-page">
 
-        {% include 'header.html' %}
+            {% include 'header.html' %}
 
-        {% for h in hotel %}
+            {% for h in hotel %}
             <div id="fh5co-tours" class="fh5co-section-gray">
                 <div class="container">
                     <div class="row">
@@ -28,7 +31,7 @@
                                 <img src="{% static 'images/hotel1.webp' %}" class="img-responsive">
                             </div>
                             <br>
-                            <a class="btn btn-primary btn-outline" href="booking/{{ h.hotelName }}">Book Now
+                            <a class="btn btn-primary btn-outline" href="booking/{{h.hotelName}}">Book Now
                                 <i class="icon-arrow-right22"></i></a>
                         </div>
                         <div>
@@ -82,12 +85,13 @@
                     </div>
                 </div>
             </div>
-        {% endfor %}
+            {% endfor %}
 
-        {% include 'footer.html' %}
+            {% include 'footer.html' %}
 
+        </div>
     </div>
-</div>
-{% include 'JS.html' %}
+    {% include 'JS.html' %}
 </body>
+
 </html>

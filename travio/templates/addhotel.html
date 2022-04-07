@@ -60,58 +60,70 @@
                              <div class="row">
                                  <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
                                      <br>
-                                     <h3>Add New Tour</h3>
+                                     <h3>Add New Hotel</h3>
                                  </div>
                              </div>
-                             <form class="col-md-12" action="addt" method="POST" >
+                             <form class="col-md-12" action="addh" method="POST" >
                                  {%csrf_token %}
                                  <div role="tabpanel" class="tab-pane" id="register">
                                          <div class="col-xxs-12 col-xs-12 mt">
                                              <div class="input-field">
-                                                 <label for="tid">Tour Id</label>
-                                                 <input type="number" class="form-control" id="tid" name="tid"/>
+                                                 <label for="hotelId">Hotel Id</label>
+                                                 <input type="number" class="form-control" id="hotelId" name="hotelId"/>
                                              </div>
                                          </div>
                                          <div class="col-xxs-12 col-xs-12 mt">
                                              <div class="input-field">
-                                                 <label for="ptitle">Package Title</label>
-                                                 <input type="text" class="form-control" id="ptitle" name="ptitle"/>
+                                                 <label for="hotelName">Hotel Name</label>
+                                                 <input type="text" class="form-control" id="hotelName" name="hotelName"/>
                                              </div>
                                          </div>
                                          <div class="col-xxs-12 col-xs-12 mt">
                                              <div class="input-field">
-                                                 <label for="ttype">Tour Type</label>
-                                                 <input type="text" class="form-control" id="ttype" name="ttype"/>
+                                                 <label for="city">City</label>
+                                                 <input type="text" class="form-control" id="city" name="city"/>
                                              </div>
                                          </div>
                                          <div class="col-xxs-12 col-xs-12 mt">
                                              <div class="input-field">
-                                                 <label for="img1">Image 1 name</label>
-                                                 <input type="text" class="form-control" id="img1" name="img1"/>
+                                                 <label for="hotelAddress">Hotel Address</label>
+                                                 <input type="text" class="form-control" id="hotelAddress" name="hotelAddress"/>
                                              </div>
                                          </div>
                                          <div class="col-xxs-12 col-xs-12 mt">
                                              <div class="input-field">
-                                                 <label for="img2">Image 2 name</label>
-                                                 <input type="text" class="form-control" id="img2" name="img2" />
+                                                 <label for="pincode">Pincode</label>
+                                                 <input type="text" class="form-control" id="pincode" name="pincode" />
                                              </div>
                                          </div>
                                         <div class="col-xxs-12 col-xs-12 mt">
                                             <div class="input-field">
-                                                <label for="tdes">Tour Description</label>
-                                                <input type="text" class="form-control" id="tdes" name="tdes" />
+                                                <label for="hotelDesc">Hotel Description</label>
+                                                <input type="text" class="form-control" id="hotelDesc" name="hotelDesc" />
                                             </div>
                                         </div>
                                         <div class="col-xxs-12 col-xs-12 mt">
                                             <div class="input-field">
-                                                <label for="d">Duration</label>
-                                                <input type="text" class="form-control" id="tdate" name="d" />
+                                                <label for="roomType">Room Type</label>
+                                                <input type="text" class="form-control" id="roomType" name="roomType" />
                                             </div>
                                         </div>
                                         <div class="col-xxs-12 col-xs-12 mt">
                                             <div class="input-field">
                                                 <label for="price">Price</label>
                                                 <input type="number" class="form-control" id="price" name="price" />
+                                            </div>
+                                        </div>
+                                        <div class="col-xxs-12 col-xs-12 mt">
+                                            <div class="input-field">
+                                                <label for="image">Image</label>
+                                                <input type="text" class="form-control" id="image" name="image" />
+                                            </div>
+                                        </div>
+                                        <div class="col-xxs-12 col-xs-12 mt">
+                                            <div class="input-field">
+                                                <label for="status">Status</label>
+                                                <input type="text" class="form-control" id="status" name="status" />
                                             </div>
                                         </div>
                                         <div class="col-xs-12">
