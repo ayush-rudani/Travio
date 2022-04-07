@@ -1,4 +1,5 @@
 {% load static %}
+{% static "images" as baseUrl %}
 <html class="no-js"> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
@@ -30,12 +31,13 @@
 
         {% include 'header.html' %}
 
+        {% for h in hotel %}
         <div id="fh5co-tours" class="fh5co-section-gray">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-                        <h3>Hotel Name</h3>
-                        <p>Mountain hotel with outdoor pool, near Nakki Lake</p>
+                        <h3>{{h.hotelName}}</h3>
+                        <p>{{h.hotelDesc}}</p>
                     </div>
                 </div>
                 <div class="row row-bottom-padded-md">
@@ -44,46 +46,16 @@
                             <img src="{% static 'images/hotel1.webp' %}" class="img-responsive">
                         </div>
                         <br>
-                        <a class="btn btn-primary btn-outline" href="#">Book Now <iclass="icon-arrow-right22"></i></a>
+                        <a class="btn btn-primary btn-outline" href="booking/{{h.hotelName}}">Book Now <iclass="icon-arrow-right22"></i></a>
                     </div>
                     <div>
-                        <h3>Sterling Mount Abu</h3>
-                        <h2 style="color:#F78536">Rs. 8870</h2>
-                        <p>Neelkanth Road, Mount Abu, Abu Road,  Rajesthan, India - 307501</p>
-                        <p>Room Type : Classic Double Room</p>
-                        <p>Status : Available</p>
+                        <h3>{{h.hotelName}}</h3>
+                        <h2 style="color:#F78536">Rs. {{h.price}}</h2>
+                        <p>{{h.hotelAddress}} - {{h.pinCode}}</p>
+                        <p>Room Type : {{h.roomType}}</p>
+                        <p>Status : {{h.status}}</p>
                     </div>
                 </div>
-                <!-- <div class="row">
-                    <div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn">
-                        <div href="#">
-                            <img src="{% static 'images/cafe.jpg' %}" alt="Free HTML5 Website Template by FreeHTML5.co"
-                                           class="img-responsive">
-                            <div class="desc hotel">
-                                <span></span>
-                                <h3>Cafe</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn">
-                        <div href="#"><img src="{% static 'images/amenities.jpg' %}" alt="Free HTML5 Website Template by FreeHTML5.co"
-                                           class="img-responsive">
-                            <div class="desc">
-                                <span></span>
-                                <h3>Amenities</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn">
-                        <div href="#"><img src="{% static 'images/gym.jpg' %}" alt="Free HTML5 Website Template by FreeHTML5.co"
-                                           class="img-responsive">
-                            <div class="desc">
-                                <span></span>
-                                <h3>Gym</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
                 <div class="row">
                     <div class="col-md-4 animate-box">
 
@@ -127,7 +99,7 @@
                 </div>
             </div>
         </div>
-        
+        {%endfor%}
 
         {% include 'footer.html' %}
     
