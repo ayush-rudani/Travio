@@ -216,10 +216,11 @@ def payment(request, hname):
         hbooking.save()
         print('Booking info added')
         messages.info(request, 'Booking info added')
+
         context = {}
         context['hname'] = hname
         context['user'] = user
-        context['hbooking'] = hbooking
+        context['booking_details'] = hbooking
     return render(request, "receipt.html", context)
 
 
