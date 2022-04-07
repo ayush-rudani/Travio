@@ -4,25 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Travel &mdash; 100% Free Fully Responsive HTML5 Template by FREEHTML5.co</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Free HTML5 Template by FREEHTML5.CO"/>
-    <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive"/>
-    <meta name="author" content="FREEHTML5.CO"/>
-
-    <!-- Facebook and Twitter integration -->
-    <meta property="og:title" content=""/>
-    <meta property="og:image" content=""/>
-    <meta property="og:url" content=""/>
-    <meta property="og:site_name" content=""/>
-    <meta property="og:description" content=""/>
-    <meta name="twitter:title" content=""/>
-    <meta name="twitter:image" content=""/>
-    <meta name="twitter:url" content=""/>
-    <meta name="twitter:card" content=""/>
+    <title>Hotel</title>
 
     {% include 'CSS.html' %}
-    
+
 </head>
 <body>
 <div id="fh5co-wrapper">
@@ -44,22 +29,22 @@
                 </div>
                 <div class="row row-bottom-padded-md">
                     {% for hotel in hotels %}
-		            <div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn">
-                        <!-- Pending Work -->
-                        <!-- Add hotel image from database remaining -->
-                        <div href="#"><img src="{% static 'images/hotel1.webp' %}"
-                                           class="img-responsive">
-                            <div class="desc">
-                                <span></span>
-                                <h3>{{hotel.hotelName}}</h3>
-                                <span>{{hotel.city}}</span>
-                                <span class="price">Rs. {{hotel.price}}</span>
-                                <a class="btn btn-primary btn-outline" href='hDetails/{{hotel.hotelId}}'>View More<i
-                                        class="icon-arrow-right22"></i></a>
+                        <div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn">
+                            <!-- Pending Work -->
+                            <!-- Add hotel image from database remaining -->
+                            <div href="#"><img src="{% static 'images/hotel1.webp' %}"
+                                               class="img-responsive">
+                                <div class="desc">
+                                    <span></span>
+                                    <h3>{{ hotel.hotelName }}</h3>
+                                    <span>{{ hotel.city }}</span>
+                                    <span class="price">Rs. {{ hotel.price }}</span>
+                                    <a class="btn btn-primary btn-outline" href='hDetails/{{ hotel.hotelId }}'>View More<i
+                                            class="icon-arrow-right22"></i></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-		            {%endfor%}
+                    {% endfor %}
                 </div>
 
                 <div class="row">
