@@ -1,0 +1,149 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Travel &mdash; 100% Free Fully Responsive HTML5 Template by FREEHTML5.co</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Free HTML5 Template by FREEHTML5.CO"/>
+    <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive"/>
+    <meta name="author" content="FREEHTML5.CO"/>
+
+    <!-- Facebook and Twitter integration -->
+    <meta property="og:title" content=""/>
+    <meta property="og:image" content=""/>
+    <meta property="og:url" content=""/>
+    <meta property="og:site_name" content=""/>
+    <meta property="og:description" content=""/>
+    <meta name="twitter:title" content=""/>
+    <meta name="twitter:image" content=""/>
+    <meta name="twitter:url" content=""/>
+    <meta name="twitter:card" content=""/>
+
+    {% include 'CSS.html' %}
+
+    <style>
+        .container {
+            margin: auto;
+            width: 65%;
+            padding: 10px;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="fh5co-wrapper">
+        <div id="fh5co-page">
+            <header id="fh5co-header-section" class="sticky-banner">
+                <div class="container">
+                    <div class="nav-header">
+                        <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
+                        <h1 id="fh5co-logo"><a href="{% url 'adminpanel' %}"><i class="icon-airplane"></i>Travio</a></h1>
+                        <!-- START #fh5co-menu-wrap -->
+                        <nav id="fh5co-menu-wrap" role="navigation">
+                            <ul class="sf-menu" id="fh5co-primary-menu">
+                                <li><a>Welcome Admin</a></li>
+                                <li><a href="{% url 'Logout' %}">Logout</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+
+            <div class="desc profile-container row">
+                <div class="container">
+                    <div id="fh5co-destination">
+                     <div class="tour-fluid">
+                        <div class="container">
+                         <div class="row">
+                             <div class="row">
+                                 <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                                     <br>
+                                     <h3>Add New Hotel</h3>
+                                 </div>
+                             </div>
+                             <form class="col-md-12" action="addh" method="POST" >
+                                 {%csrf_token %}
+                                 <div role="tabpanel" class="tab-pane" id="register">
+                                         <div class="col-xxs-12 col-xs-12 mt">
+                                             <div class="input-field">
+                                                 <label for="hotelId">Hotel Id</label>
+                                                 <input type="number" class="form-control" id="hotelId" name="hotelId"/>
+                                             </div>
+                                         </div>
+                                         <div class="col-xxs-12 col-xs-12 mt">
+                                             <div class="input-field">
+                                                 <label for="hotelName">Hotel Name</label>
+                                                 <input type="text" class="form-control" id="hotelName" name="hotelName"/>
+                                             </div>
+                                         </div>
+                                         <div class="col-xxs-12 col-xs-12 mt">
+                                             <div class="input-field">
+                                                 <label for="city">City</label>
+                                                 <input type="text" class="form-control" id="city" name="city"/>
+                                             </div>
+                                         </div>
+                                         <div class="col-xxs-12 col-xs-12 mt">
+                                             <div class="input-field">
+                                                 <label for="hotelAddress">Hotel Address</label>
+                                                 <input type="text" class="form-control" id="hotelAddress" name="hotelAddress"/>
+                                             </div>
+                                         </div>
+                                         <div class="col-xxs-12 col-xs-12 mt">
+                                             <div class="input-field">
+                                                 <label for="pincode">Pincode</label>
+                                                 <input type="text" class="form-control" id="pincode" name="pincode" />
+                                             </div>
+                                         </div>
+                                        <div class="col-xxs-12 col-xs-12 mt">
+                                            <div class="input-field">
+                                                <label for="hotelDesc">Hotel Description</label>
+                                                <input type="text" class="form-control" id="hotelDesc" name="hotelDesc" />
+                                            </div>
+                                        </div>
+                                        <div class="col-xxs-12 col-xs-12 mt">
+                                            <div class="input-field">
+                                                <label for="roomType">Room Type</label>
+                                                <input type="text" class="form-control" id="roomType" name="roomType" />
+                                            </div>
+                                        </div>
+                                        <div class="col-xxs-12 col-xs-12 mt">
+                                            <div class="input-field">
+                                                <label for="price">Price</label>
+                                                <input type="number" class="form-control" id="price" name="price" />
+                                            </div>
+                                        </div>
+                                        <div class="col-xxs-12 col-xs-12 mt">
+                                            <div class="input-field">
+                                                <label for="image">Image</label>
+                                                <input type="text" class="form-control" id="image" name="image" />
+                                            </div>
+                                        </div>
+                                        <div class="col-xxs-12 col-xs-12 mt">
+                                            <div class="input-field">
+                                                <label for="status">Status</label>
+                                                <input type="text" class="form-control" id="status" name="status" />
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                             <input type="submit" class="btn btn-primary btn-block"
+                                                 value="Add">
+                                        </div>
+                                        <br><br><br> <br><br> <br>
+                                 </div>
+                             </form>
+                         </div>
+                        </div>
+                     </div>
+                 </div>  
+
+                 </div>
+             </div>
+            
+        </div>
+    </div>
+    
+    {% include 'JS.html' %}
+</body>
+</html>

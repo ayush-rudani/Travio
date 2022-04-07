@@ -94,8 +94,19 @@ def contact(request):
 def adminpanel(request):
     return render(request,"adminpage.html")
 
+def addhotel(request):
+    return render(request, "addhotel.html")
+
 def addtour(request):
     return render(request,"addtour.html")
+
+def viewtour(request):
+    tour = Package.objects.all()
+    return render(request, 'viewtour.html', {'tour': tour})
+
+def viewuser(request):
+    user = User.objects.all()
+    return render(request, 'viewuser.html', {'user': user})
 
 def addt(request):
     if request.method == 'POST':
@@ -107,16 +118,26 @@ def addt(request):
         tdes = request.POST.get("packageDesc") 
         d = request.POST.get("duration")
         price = request.POST.get("disPrice")
-        # ptitle = request.POST['packageTitle'] 
-        # ttype = request.POST['type'] 
-        # img1 = request.POST['image1'] 
-        # img2 = request.POST['image2'] 
-        # tdes = request.POST['packageDesc'] 
-        # d = request.POST['duration'] 
-        # price = request.POST['disPrice'] 
         
         tour = Package.objects.create(tourId=tid,packageTitle=ptitle,type=ttype,image1=img1,image2=img2,packageDesc=tdes,duration=d,price=price)
         tour.save()
+    return redirect('adminpanel')
+
+def addh(request):
+    if request.method == 'POST':
+        hotelId = request.POST.get("hotelId")
+        hotelName = request.POST.get("hotelName")
+        city = request.POST.get("city")
+        hotelAddress = request.POST.get("hotelAddress")
+        pincode = request.POST.get("pincode")
+        hotelDesc = request.POST.get("hotelDesc")
+        roomType = request.POST.get("roomType")
+        price = request.POST.get("price")
+        image = request.POST.get("image")
+        status = request.POST.get("status")
+
+        hotel = Hotel.objects.create(hotelId=hotelId, hotelName=hotelName,city=city,hotelAddress=hotelAddress, pincode=pincode,hotelDesc=hotelDesc,roomType=roomType,price=price,image=image,status=status)
+        hotel.save()
     return redirect('adminpanel')
 
 def hotel(request):
