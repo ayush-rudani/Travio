@@ -12,10 +12,8 @@ from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
-
 def register(request):
     return render(request, "register.html")
-
 
 def signup(request):
     if request.method == 'POST':
