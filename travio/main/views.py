@@ -127,6 +127,11 @@ def viewhotel(request):
     return render(request, 'viewhotel.html', {'hotels': hotels})
 
 
+def viewbooking(request):
+    bookings = Booking.objects.all()
+    return render(request, 'viewbooking.html', {'bookings': bookings})
+
+
 def addt(request):
     if request.method == 'POST':
         tid = request.POST.get("tourId")

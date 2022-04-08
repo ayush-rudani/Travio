@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>View Hotels</title>
+    {% include 'CSS.html' %}
+
+    <style>
+        .container {
+            margin: auto;
+            width: 65%;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="fh5co-wrapper">
+        <div id="fh5co-page">
+            <header id="fh5co-header-section" class="sticky-banner">
+                <div class="container">
+                    <div class="nav-header">
+                        <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
+                        <h1 id="fh5co-logo">
+                            <a href="{% url 'adminpanel' %}"><i class="icon-airplane"></i>Travio</a>
+                        </h1>
+                        <!-- START #fh5co-menu-wrap -->
+                        <nav id="fh5co-menu-wrap" role="navigation">
+                            <ul class="sf-menu" id="fh5co-primary-menu">
+                                <li><a>Welcome Admin</a></li>
+                                <li><a href="{% url 'Logout' %}">Logout</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+
+            <div id="fh5co-tours" class="fh5co-section-gray">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                            <h3>Booking History</h3>
+                        </div>
+                    </div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">User ID</th>
+                                <th scope="col">Full Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Contact</th>
+                                <th scope="col">People</th>
+                                <th scope="col">Booking Date</th>
+                                <th scope="col">Booking Name</th>
+                                <th scope="col">Total Fair</th>
+                                <th scope="col">Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for b in bookings %}
+                            <tr>
+                                <th scope="row">{{b.uid}}</th>
+                                <td>{{b.fname}}</td>
+                                <td>{{b.email}}</td>
+                                <td>{{b.contact}}</td>
+                                <td>{{b.people}}</td>
+                                <td>{{b.tdate}}</td>
+                                <td>{{b.bookingName}}</td>
+                                <td>{{b.bookingFair}}</td>
+                                <td>{% if b.type %}Hotel{% else %}Package{% endif %}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'JS.html' %}
+</body>
+
+</html>

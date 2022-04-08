@@ -30,5 +30,6 @@ urlpatterns = [
     path('viewuser', views.viewuser, name="viewuser"),
     path('addhotel', views.addhotel, name="addhoetl"),
     path('viewhotel', views.viewhotel, name="viewhotel"),
+    path('viewbooking', views.viewbooking, name="viewbooking"),
     path('addh', views.addh, name="addh"),
 ]
