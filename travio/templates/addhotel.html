@@ -50,7 +50,7 @@
                       <h3>Add New Hotel</h3>
                     </div>
                   </div>
-                  <form class="col-md-12" action="addh" method="POST">
+                  <form class="col-md-12" action="addh" method="POST" enctype=multipart/form-data>
                     {%csrf_token %}
                     <div role="tabpanel" class="tab-pane" id="register">
                       <div class="col-xxs-12 col-xs-12 mt">
@@ -104,7 +104,7 @@
                       <div class="col-xxs-12 col-xs-12 mt">
                         <div class="input-field">
                           <label for="image">Image</label>
-                          <input type="text" class="form-control" id="image" name="image" />
+                          <input type="file" class="form-control" id="image" name="image" />
                         </div>
                       </div>
                       <div class="col-xxs-12 col-xs-12 mt">
