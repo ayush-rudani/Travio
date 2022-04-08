@@ -1,157 +1,94 @@
 {% load static %}
 <!DOCTYPE html>
 <html class="no-js">
-  <!--<![endif]-->
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Add Tour</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
-    <meta
-      name="keywords"
-      content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive"
-    />
-    <meta name="author" content="FREEHTML5.CO" />
 
-    <!-- Facebook and Twitter integration -->
-    <meta property="og:title" content="" />
-    <meta property="og:image" content="" />
-    <meta property="og:url" content="" />
-    <meta property="og:site_name" content="" />
-    <meta property="og:description" content="" />
-    <meta name="twitter:title" content="" />
-    <meta name="twitter:image" content="" />
-    <meta name="twitter:url" content="" />
-    <meta name="twitter:card" content="" />
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Add Tour</title>
+  {% include 'CSS.html' %}
+</head>
 
-    {% include 'CSS.html' %}
-  </head>
-  <body>
-    <div id="fh5co-wrapper">
-      <div id="fh5co-page">
-        {% include 'header.html' %}
-        <div class="desc profile-container row">
-          <div class="container">
-            <div id="fh5co-destination">
-              <div class="tour-fluid">
+<body>
+  <div id="fh5co-wrapper">
+    <div id="fh5co-page">
+      {% include 'header.html' %}
+      <div class="desc profile-container row">
+        <div class="container">
+          <div id="fh5co-destination">
+            <div class="tour-fluid">
+              <div class="row">
                 <div class="row">
-                  <div class="row">
-                    <div
-                      class="col-md-8 col-md-offset-2 text-center heading-section animate-box"
-                    >
-                      <br />
-                      <h3>Add New Tour</h3>
+                  <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                    <br />
+                    <h3>Add New Tour</h3>
+                  </div>
+                </div>
+                <form class="col-md-12" action="addt" method="POST">
+                  {%csrf_token %}
+                  <div role="tabpanel" class="tab-pane" id="register">
+                    <div class="col-xxs-12 col-xs-12 mt">
+                      <div class="input-field">
+                        <label for="tid">Tour Id</label>
+                        <input type="number" class="form-control" id="tid" name="tid" />
+                      </div>
+                    </div>
+                    <div class="col-xxs-12 col-xs-12 mt">
+                      <div class="input-field">
+                        <label for="ptitle">Package Title</label>
+                        <input type="text" class="form-control" id="ptitle" name="ptitle" />
+                      </div>
+                    </div>
+                    <div class="col-xxs-12 col-xs-12 mt">
+                      <div class="input-field">
+                        <label for="ttype">Tour Type</label>
+                        <input type="text" class="form-control" id="ttype" name="ttype" />
+                      </div>
+                    </div>
+                    <div class="col-xxs-12 col-xs-12 mt">
+                      <div class="input-field">
+                        <label for="img1">Image 1 name</label>
+                        <input type="text" class="form-control" id="img1" name="img1" />
+                      </div>
+                    </div>
+                    <div class="col-xxs-12 col-xs-12 mt">
+                      <div class="input-field">
+                        <label for="img2">Image 2 name</label>
+                        <input type="text" class="form-control" id="img2" name="img2" />
+                      </div>
+                    </div>
+                    <div class="col-xxs-12 col-xs-12 mt">
+                      <div class="input-field">
+                        <label for="tdes">Tour Description</label>
+                        <input type="text" class="form-control" id="tdes" name="tdes" />
+                      </div>
+                    </div>
+                    <div class="col-xxs-12 col-xs-12 mt">
+                      <div class="input-field">
+                        <label for="d">Duration</label>
+                        <input type="text" class="form-control" id="tdate" name="d" />
+                      </div>
+                    </div>
+                    <div class="col-xxs-12 col-xs-12 mt">
+                      <div class="input-field">
+                        <label for="price">Price</label>
+                        <input type="number" class="form-control" id="price" name="price" />
+                      </div>
+                    </div>
+                    <div class="col-xs-12">
+                      <input type="submit" class="btn btn-primary btn-block" value="Add" />
                     </div>
                   </div>
-                  <form class="col-md-12" action="addt" method="POST">
-                    {%csrf_token %}
-                    <div role="tabpanel" class="tab-pane" id="register">
-                      <div class="col-xxs-12 col-xs-12 mt">
-                        <div class="input-field">
-                          <label for="tid">Tour Id</label>
-                          <input
-                            type="number"
-                            class="form-control"
-                            id="tid"
-                            name="tid"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-xxs-12 col-xs-12 mt">
-                        <div class="input-field">
-                          <label for="ptitle">Package Title</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="ptitle"
-                            name="ptitle"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-xxs-12 col-xs-12 mt">
-                        <div class="input-field">
-                          <label for="ttype">Tour Type</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="ttype"
-                            name="ttype"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-xxs-12 col-xs-12 mt">
-                        <div class="input-field">
-                          <label for="img1">Image 1 name</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="img1"
-                            name="img1"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-xxs-12 col-xs-12 mt">
-                        <div class="input-field">
-                          <label for="img2">Image 2 name</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="img2"
-                            name="img2"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-xxs-12 col-xs-12 mt">
-                        <div class="input-field">
-                          <label for="tdes">Tour Description</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="tdes"
-                            name="tdes"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-xxs-12 col-xs-12 mt">
-                        <div class="input-field">
-                          <label for="d">Duration</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="tdate"
-                            name="d"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-xxs-12 col-xs-12 mt">
-                        <div class="input-field">
-                          <label for="price">Price</label>
-                          <input
-                            type="number"
-                            class="form-control"
-                            id="price"
-                            name="price"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-xs-12">
-                        <input
-                          type="submit"
-                          class="btn btn-primary btn-block"
-                          value="Add"
-                        />
-                      </div>
-                    </div>
-                  </form>
-                </div>
+                </form>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    {% include 'JS.html' %}
-  </body>
+  {% include 'JS.html' %}
+</body>
+
 </html>
