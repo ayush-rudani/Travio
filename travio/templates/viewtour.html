@@ -26,7 +26,7 @@
     <style>
         .container {
             margin: auto;
-            width: 50%;
+            width: 65%;
             padding: 10px;
         }
     </style>
@@ -35,7 +35,21 @@
 <body>
     <div id="fh5co-wrapper">
         <div id="fh5co-page">
-            {% include 'header.html' %}
+            <header id="fh5co-header-section" class="sticky-banner">
+                <div class="container">
+                    <div class="nav-header">
+                        <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
+                        <h1 id="fh5co-logo"><a href="{% url 'adminpanel' %}"><i class="icon-airplane"></i>Travio</a></h1>
+                        <!-- START #fh5co-menu-wrap -->
+                        <nav id="fh5co-menu-wrap" role="navigation">
+                            <ul class="sf-menu" id="fh5co-primary-menu">
+                                <li><a>Welcome Admin</a></li>
+                                <li><a href="{% url 'Logout' %}">Logout</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
 
             <div id="fh5co-tours" class="fh5co-section-gray">
                 <div class="container">
@@ -47,33 +61,28 @@
                     <table class="table table-striped">
                         <thead>
                           <tr>
-                            <th scope="col">Booking Item</th>
-                            <th scope="col">Total Fair</th>
-                            <th scope="col">Booking Date</th>
-                            <!-- <th scope="col">Type</th> -->
+                            <th scope="col">Package Title</th>
+                            <th scope="col">Package Type</th>
+                            <th scope="col">Duration</th>
+                            <th scope="col">BUDGET <sub>Per Person</sub></th>
                           </tr>
                         </thead>
                         <tbody>
-                          {% for h in history %} 
+                        {% for t in tour %} 
                           <tr>
-                            <th scope="row">{{h.bookingName}}</th>
-                            <td>{{h.bookingFair}}</td>
-                            <td>{{h.tdate}}</td>
-                            <!-- <td>{% if h.type %}</td> -->
+                            <th scope="row">{{t.packageTitle}}</th>
+                            <td>{{t.type}}</td>
+                            <td>{{t.duration}}</td>
+                            <td>{{t.price}}</td>
                           </tr>
                           {% endfor %}
                         </tbody>
                       </table>
                 </div>
             </div>
-
-
-
-
-
-            {% include 'footer.html' %}
         </div>
     </div>
+    
     {% include 'JS.html' %}
 </body>
 </html>
