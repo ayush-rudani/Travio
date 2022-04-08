@@ -122,6 +122,11 @@ def viewuser(request):
     return render(request, 'viewuser.html', {'user': user})
 
 
+def viewhotel(request):
+    hotels = Hotel.objects.all()
+    return render(request, 'viewhotel.html', {'hotels': hotels})
+
+
 def addt(request):
     if request.method == 'POST':
         tid = request.POST.get("tourId")
