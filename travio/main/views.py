@@ -135,10 +135,12 @@ def viewbooking(request):
 def addt(request):
     if request.method == 'POST':
         tid = request.POST.get("tourId")
-        ptitle = request.POST.get("packageTitle")
+        ptitle = request.POST.get("ptitle")
         ttype = request.POST.get("type")
-        img1 = request.POST.get("image1")
-        img2 = request.POST.get("image2")
+        # img1 = request.POST.get("image1")
+        # img2 = request.POST.get("image2")
+        img1 = request.FILES.get("image1")
+        img2 = request.FILES.get("image2")
         tdes = request.POST.get("packageDesc")
         d = request.POST.get("duration")
         price = request.POST.get("disPrice")
@@ -166,11 +168,12 @@ def addh(request):
         hotelDesc = request.POST.get("hotelDesc")
         roomType = request.POST.get("roomType")
         price = request.POST.get("price")
-        image = request.POST.get("image")
+        # image = request.POST.get("image")
+        image = request.FILES.get("image")
         status = request.POST.get("status")
 
         hotel = Hotel.objects.create(hotelId=hotelId, hotelName=hotelName, city=city, hotelAddress=hotelAddress,
-                                     pincode=pincode, hotelDesc=hotelDesc, roomType=roomType, price=price, image=image, status=status)
+                                     pinCode=pincode, hotelDesc=hotelDesc, roomType=roomType, price=price, image=image, status=status)
         hotel.save()
     return redirect('adminpanel')
 

@@ -13,7 +13,7 @@
   <div id="fh5co-wrapper">
     <div id="fh5co-page">
       {% include 'header.html' %}
-      <div class="desc profile-container row">
+      <div class="desc profile-container row ">
         <div class="container">
           <div id="fh5co-destination">
             <div class="tour-fluid">
@@ -24,7 +24,7 @@
                     <h3>Add New Tour</h3>
                   </div>
                 </div>
-                <form class="col-md-12" action="addt" method="POST">
+                <form class="col-md-12" action="addt" method="POST" enctype=multipart/form-data>
                   {%csrf_token %}
                   <div role="tabpanel" class="tab-pane" id="register">
                     <div class="col-xxs-12 col-xs-12 mt">
@@ -42,19 +42,27 @@
                     <div class="col-xxs-12 col-xs-12 mt">
                       <div class="input-field">
                         <label for="ttype">Tour Type</label>
-                        <input type="text" class="form-control" id="ttype" name="ttype" />
+                        <!-- <input type="text" class="form-control" id="ttype" name="ttype" /> -->
+                        <select name="ttype" class="form-control" id="ttype">
+                          <option value="adventure">Adventure</option>
+                          <option value="wildlife">WildLife</option>
+                          <option value="family">Family</option>
+                          <option value="pilgrimage">Pilgrimage</option>
+                          <option value="honeymoon">Honeymoon</option>
+                        </select>
                       </div>
                     </div>
                     <div class="col-xxs-12 col-xs-12 mt">
                       <div class="input-field">
                         <label for="img1">Image 1 name</label>
-                        <input type="text" class="form-control" id="img1" name="img1" />
+                        <!-- <input type="text" class="form-control" id="img1" name="img1" /> -->
+                        <input class="form-control" type="file" id="img1" name="img1" />
                       </div>
                     </div>
                     <div class="col-xxs-12 col-xs-12 mt">
                       <div class="input-field">
                         <label for="img2">Image 2 name</label>
-                        <input type="text" class="form-control" id="img2" name="img2" />
+                        <input type="file" class="form-control" id="img2" name="img2" />
                       </div>
                     </div>
                     <div class="col-xxs-12 col-xs-12 mt">
@@ -75,7 +83,7 @@
                         <input type="number" class="form-control" id="price" name="price" />
                       </div>
                     </div>
-                    <div class="col-xs-12">
+                    <div class="col-xs-12 mb-5">
                       <input type="submit" class="btn btn-primary btn-block" value="Add" />
                     </div>
                   </div>
