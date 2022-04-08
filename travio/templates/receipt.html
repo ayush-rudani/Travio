@@ -1,16 +1,23 @@
 {% load static %}
 <!DOCTYPE html>
 <html class="no-js">
-<!--<![endif]-->
+  <!--<![endif]-->
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Travio</title>
-    <link rel="icon" href="{% static 'images/icon.png' %}" type="image/icon type">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link
+      rel="icon"
+      href="{% static 'images/icon.png' %}"
+      type="image/icon type"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
-    <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
+    <meta
+      name="keywords"
+      content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive"
+    />
     <meta name="author" content="FREEHTML5.CO" />
 
     <!-- Facebook and Twitter integration -->
@@ -27,63 +34,69 @@
     {% include 'CSS.html' %}
 
     <style>
-        .container {
-            margin: auto;
-            width: 50%;
-            padding: 10px;
-        }
+      .container {
+        margin: auto;
+        width: 50%;
+        padding: 10px;
+      }
     </style>
 
     <script>
-        function printDiv() {
-            var divContents = document.getElementById("print").innerHTML;
-            var a = window.open();
-            // a.document.write('<html>');
-            // a.document.write('<body > <h1>Div contents are <br>');
-            a.document.write(divContents);
-            // a.document.write('</body></html>');
-            a.document.close();
-            a.print();
-        }
+      function printDiv() {
+        var divContents = document.getElementById("print").innerHTML;
+        var a = window.open();
+        // a.document.write('<html>');
+        // a.document.write('<body > <h1>Div contents are <br>');
+        a.document.write(divContents);
+        // a.document.write('</body></html>');
+        a.document.close();
+        a.print();
+      }
     </script>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="fh5co-wrapper">
-        <div id="fh5co-page">
-            {% include 'header.html' %}
+      <div id="fh5co-page">
+        {% include 'header.html' %}
 
-            <div id="fh5co-tours" class="fh5co-section-gray">
-                <div class="container" id="print">
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-                            <h3>Payment Receipt</h3>
-                        </div>
-                    </div>
-                    <div>
-                        <h4>Customer Details</h4>
-                        <p>Customer Name : {{user.username}}</p>
-                        <p>Contact Number : {{booking_details.contact}}</p>
-                        <p>Email Id : {{booking_details}}</p>
-                        <h4>Tour Details</h4>
-                        <p>Package Name : </p>
-                        <p>Tour Type : Hotel</p>
-                        <p>Tour Duration : 6 Days</p>
-                        <h4>Booking Details</h4>
-                        <p>Adults : 1 | Children : 0</p>
-                        <p>Booking Fair (For one person) : 17999</p>
-                        <p>Total Amount : 17999</p>
-                        <p>Booking Date : 31/03/2022</p>
-                        <p>Payment Number : 123456</p>
-                        <a class="btn btn-primary btn-outline" href="#" onclick="printDiv()">Print</a>
-                    </div>
-                </div>
+        <div id="fh5co-tours" class="fh5co-section-gray">
+          <div class="container" id="print">
+            <div class="row">
+              <div
+                class="col-md-8 col-md-offset-2 text-center heading-section animate-box"
+              >
+                <h3>Payment Receipt</h3>
+              </div>
             </div>
-
-            {% include 'footer.html' %}
+            <div>
+              <h4>Customer Details</h4>
+              <p>Customer Name : {{user.username}}</p>
+              <p>Contact Number : {{booking_details.contact}}</p>
+              <p>Email Id : {{booking_details.email}}</p>
+              <h4>Tour Details</h4>
+              <p>Package Name : {{booking_details.bookingName}}</p>
+              <p>Tour Type : Hotel</p>
+              <p>Tour Duration : 6 Days</p>
+              <h4>Booking Details</h4>
+              <p>Adults : 1 | Children : 0</p>
+              <p>Booking Fair (For one person) : 17999</p>
+              <p>Total Amount : 17999</p>
+              <p>Booking Date : 31/03/2022</p>
+              <p>Payment Number : 123456</p>
+              <a
+                class="btn btn-primary btn-outline"
+                href="#"
+                onclick="printDiv()"
+                >Print</a
+              >
+            </div>
+          </div>
         </div>
+
+        {% include 'footer.html' %}
+      </div>
     </div>
     {% include 'JS.html' %}
-</body>
-
+  </body>
 </html>
