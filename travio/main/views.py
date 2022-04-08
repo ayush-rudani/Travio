@@ -256,7 +256,7 @@ def profile(request):
 def tHistory(request):
     user = request.user
     history = Booking.objects.all().filter(uid=user.id)
-    return render(request, "tourhistory.html",{'history': history})
+    return render(request, "tourhistory.html", {'history': history})
 
 # class Counter:
 #     count = 0

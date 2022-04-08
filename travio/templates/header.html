@@ -1,30 +1,38 @@
 <header id="fh5co-header-section" class="sticky-banner">
-    <div class="container">
-        <div class="nav-header">
-            <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
-            <h1 id="fh5co-logo"><a href="index.html"><i class="icon-airplane"></i>Travio</a></h1>
-            <!-- START #fh5co-menu-wrap -->
-            <nav id="fh5co-menu-wrap" role="navigation">
-                <ul class="sf-menu" id="fh5co-primary-menu">
-                    <li class="active"><a href="{% url 'index' %}">Home</a></li>
-                    <li>
-                        <a href="{% url 'vacation' %}" class="fh5co-sub-ddown">Vacations</a>
-                        <ul class="fh5co-sub-menu">
-                            <li><a href="{% url 'adventure' %}">Adventure</a></li>
-                            <li><a href="#">Wildlife</a></li>
-                            <li><a href="#">Pilgrimage</a></li>
-                            <li><a href="#">Family</a></li>
-                            <li><a href="{% url 'tDetails' %}">Honeymoon</a></li>
-                        </ul>
-                    </li>
-                    <!-- <li><a href="flight.html">Flights</a></li> -->
-                    <li><a href="{% url 'hotel' %}">Hotel</a></li>
-                    <!-- <li><a href="car.html">Car</a></li> -->
-                    <li><a href="{% url 'contact' %}">Contact</a></li>
-                    <li><a href="{% url 'profile' %}">Profile</a></li>
-                    <li><a href="{% url 'Logout' %}">Logout</a></li>
-                </ul>
-            </nav>
-        </div>
+  <div class="container">
+    <div class="nav-header">
+      <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
+      <h1 id="fh5co-logo">
+        <a href="{% url 'index' %}"><i class="icon-airplane"></i>Travio</a>
+      </h1>
+      <!-- START #fh5co-menu-wrap -->
+      <nav id="fh5co-menu-wrap" role="navigation">
+        <ul class="sf-menu" id="fh5co-primary-menu">
+          <li class="active"><a href="{% url 'index' %}">Home</a></li>
+          <li>
+            <a href="{% url 'vacation' %}" class="fh5co-sub-ddown">Vacations</a>
+            <ul class="fh5co-sub-menu">
+              <li><a href="{% url 'adventure' %}">Adventure</a></li>
+              <li><a href="#">Wildlife</a></li>
+              <li><a href="#">Pilgrimage</a></li>
+              <li><a href="#">Family</a></li>
+              <li><a href="{% url 'tDetails' %}">Honeymoon</a></li>
+            </ul>
+          </li>
+          <!-- <li><a href="flight.html">Flights</a></li> -->
+          <li><a href="{% url 'hotel' %}">Hotel</a></li>
+          <!-- <li><a href="car.html">Car</a></li> -->
+          <li><a href="{% url 'contact' %}">Contact</a></li>
+          <li><a href="{% url 'profile' %}">Profile</a></li>
+          <!-- <li><a href="{% url 'Logout' %}">Logout</a></li> -->
+          {% if user.is_authenticated %}
+          <li><a href="{% url 'profile' %}">Profile</a></li>
+          <li><a href="{% url 'Logout' %}">Logout</a></li>
+          {% else %}
+          <li><a href="{% url 'Login' %}">Log In</a></li>
+          {% endif %}
+        </ul>
+      </nav>
     </div>
+  </div>
 </header>

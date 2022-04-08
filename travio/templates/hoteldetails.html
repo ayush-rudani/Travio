@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Travel &mdash; 100% Free Fully Responsive HTML5 Template by FREEHTML5.co</title>
+    <title>Hotel Details</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Free HTML5 Template by FREEHTML5.CO"/>
     <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive"/>
@@ -43,7 +43,8 @@
                 <div class="row row-bottom-padded-md">
 		            <div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn">
                         <div href="#">
-                            <img src="{% static 'images/hotel1.webp' %}" class="img-responsive">
+                            <!-- <img src="{% static 'images/taj.jpeg' %}" class="img-responsive"> -->
+                            <img src="{{h.image.url}}" class="img-responsive">
                         </div>
                         <br>
                         <a class="btn btn-primary btn-outline" href="booking/{{h.hotelName}}">Book Now <iclass="icon-arrow-right22"></i></a>

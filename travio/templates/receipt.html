@@ -76,14 +76,24 @@
               <p>Email Id : {{booking_details.email}}</p>
               <h4>Tour Details</h4>
               <p>Package Name : {{booking_details.bookingName}}</p>
-              <p>Tour Type : Hotel</p>
-              <p>Tour Duration : 6 Days</p>
+              <p>
+                Tour Type : {% if booking_details.bookingType %} Holiday Package
+                {% else %} Hotel {% endif %}
+              </p>
+              <!-- <p>Tour Duration : </p> -->
               <h4>Booking Details</h4>
-              <p>Adults : 1 | Children : 0</p>
-              <p>Booking Fair (For one person) : 17999</p>
-              <p>Total Amount : 17999</p>
-              <p>Booking Date : 31/03/2022</p>
-              <p>Payment Number : 123456</p>
+              <!-- <p>Adults : 1 | Children : 0</p> -->
+              <p>
+                Booking Fair (For one person) : {{booking_details.bookingFair}}
+              </p>
+              <p>
+                <!-- Total Amount : {{booking_details.people *
+                booking_details.bookingFair}} -->
+                Total Amount : {% widthratio {{booking_details.people}} 1
+                {{booking_details.bookingFair}} %}
+              </p>
+              <p>Booking Date : {{booking_details.tdate}}</p>
+              <p>Payment Number : {{booking_details.id}}</p>
               <a
                 class="btn btn-primary btn-outline"
                 href="#"

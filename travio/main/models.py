@@ -14,7 +14,8 @@ class Hotel(models.Model):
     hotelDesc = models.TextField()
     roomType = models.CharField(max_length=50)
     price = models.IntegerField()
-    image = models.CharField(max_length=50, default='hotel1.webp')
+    # image = models.CharField(max_length=50, default='hotel1.webp')
+    image = models.ImageField(upload_to='pics')
     bType = models.BooleanField(default=0)
     AVAILABLE = 'available'
     UNAVAILABLE = 'unavailable'
@@ -54,13 +55,14 @@ class Package(models.Model):
     )
 
     # image1 = models.CharField(max_length=50,default='tour.jpg')
-    image1 = models.ImageField()
+    image1 = models.ImageField(upload_to='pics')
     # image2 = models.CharField(max_length=50,default='tour.jpg')
-    image2 = models.ImageField()
+    image2 = models.ImageField(upload_to='pics')
     packageDesc = models.TextField()
     duration = models.CharField(max_length=50)
     price = models.IntegerField()
-    
+
+
 class Userdata(models.Model):
     userI = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.CharField(max_length=50, default='tour.jpg')

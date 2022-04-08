@@ -1,97 +1,121 @@
 {% load static %}
 <!DOCTYPE html>
-<html class="no-js"> <!--<![endif]-->
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Travel &mdash; 100% Free Fully Responsive HTML5 Template by FREEHTML5.co</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Free HTML5 Template by FREEHTML5.CO"/>
-    <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive"/>
-    <meta name="author" content="FREEHTML5.CO"/>
+<html class="no-js">
+  <!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Hotels</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
+    <meta
+      name="keywords"
+      content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive"
+    />
+    <meta name="author" content="FREEHTML5.CO" />
 
     <!-- Facebook and Twitter integration -->
-    <meta property="og:title" content=""/>
-    <meta property="og:image" content=""/>
-    <meta property="og:url" content=""/>
-    <meta property="og:site_name" content=""/>
-    <meta property="og:description" content=""/>
-    <meta name="twitter:title" content=""/>
-    <meta name="twitter:image" content=""/>
-    <meta name="twitter:url" content=""/>
-    <meta name="twitter:card" content=""/>
+    <meta property="og:title" content="" />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:site_name" content="" />
+    <meta property="og:description" content="" />
+    <meta name="twitter:title" content="" />
+    <meta name="twitter:image" content="" />
+    <meta name="twitter:url" content="" />
+    <meta name="twitter:card" content="" />
 
     {% include 'CSS.html' %}
-    
-</head>
-<body>
-<div id="fh5co-wrapper">
-    <div id="fh5co-page">
-
+  </head>
+  <body>
+    <div id="fh5co-wrapper">
+      <div id="fh5co-page">
         {% include 'header.html' %}
 
         <!-- end:header-top -->
 
-
         <div id="fh5co-tours" class="fh5co-section-gray">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-                        <h3>Popular hotel &amp; hostel destinations</h3>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                            there live the blind texts.</p>
-                    </div>
-                </div>
-                <div class="row row-bottom-padded-md">
-                    {% for hotel in hotels %}
-		            <div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn">
-                        <!-- Pending Work -->
-                        <!-- Add hotel image from database remaining -->
-                        <div href="#"><img src="{% static 'images/hotel1.webp' %}"
-                                           class="img-responsive">
-                            <div class="desc">
-                                <span></span>
-                                <h3>{{hotel.hotelName}}</h3>
-                                <span>{{hotel.city}}</span>
-                                <span class="price">Rs. {{hotel.price}}</span>
-                                <a class="btn btn-primary btn-outline" href='hDetails/{{hotel.hotelId}}'>View More<i
-                                        class="icon-arrow-right22"></i></a>
-                            </div>
-                        </div>
-                    </div>
-		            {%endfor%}
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12 animate-box">
-                        <h2 class="heading-title">Travel Booking guide to book a perfect hotel</h2>
-                    </div>
-                    <div class="col-md-6 animate-box">
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                            there live the blind texts. Pellentesque habitant morbi tristique senectus et netus ett
-                            mauada fames ac turpis egestas. Etiam euismod tempor leo, in suscipit urna condimentum sed.
-                            Vivamus augue enim, consectetur ac interdum a, pulvinar ac massa. Nullam malesuada
-                            congue </p>
-                        <p>Pellentesque habitant morbi tristique senectus et netus ett mauada fames ac turpis egestas.
-                            Etiam euismod tempor leo, in suscipit urna condimentum sed. Vivamus augue enim, consectetur
-                            ac interdum a, pulvinar ac massa. Nullam malesuada congue </p>
-                        <a href="#">Read More <i class="icon-arrow-right22"></i></a>
-                    </div>
-                    <div class="col-md-6 animate-box">
-                        <img class="img-responsive" src="{% static 'images/cover_bg_2.jpg' %}" alt="travel">
-                    </div>
-                </div>
+          <div class="container">
+            <div class="row">
+              <div
+                class="col-md-8 col-md-offset-2 text-center heading-section animate-box"
+              >
+                <h3>Popular hotel &amp; hostel destinations</h3>
+                <p>
+                  Far far away, behind the word mountains, far from the
+                  countries Vokalia and Consonantia, there live the blind texts.
+                </p>
+              </div>
             </div>
+            <div class="row row-bottom-padded-md">
+              {% for hotel in hotels %}
+              <div
+                class="col-md-4 col-sm-6 fh5co-tours animate-box"
+                data-animate-effect="fadeIn"
+              >
+                <!-- Pending Work -->
+                <!-- Add hotel image from database remaining -->
+                <div href="#">
+                  <!-- <img
+                    src="{% static 'images/hotel1.webp' %}"
+                    class="img-responsive"
+                  /> -->
+                  <img src="{{hotel.image.url}}" class="img-responsive" />
+                  <div class="desc">
+                    <span></span>
+                    <h3>{{hotel.hotelName}}</h3>
+                    <span>{{hotel.city}}</span>
+                    <span class="price">Rs. {{hotel.price}}</span>
+                    <a
+                      class="btn btn-primary btn-outline"
+                      href="hDetails/{{hotel.hotelId}}"
+                      >View More<i class="icon-arrow-right22"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+              {%endfor%}
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 animate-box">
+                <h2 class="heading-title">
+                  Travel Booking guide to book a perfect hotel
+                </h2>
+              </div>
+              <div class="col-md-6 animate-box">
+                <p>
+                  Far far away, behind the word mountains, far from the
+                  countries Vokalia and Consonantia, there live the blind texts.
+                  Pellentesque habitant morbi tristique senectus et netus ett
+                  mauada fames ac turpis egestas. Etiam euismod tempor leo, in
+                  suscipit urna condimentum sed. Vivamus augue enim, consectetur
+                  ac interdum a, pulvinar ac massa. Nullam malesuada congue
+                </p>
+                <p>
+                  Pellentesque habitant morbi tristique senectus et netus ett
+                  mauada fames ac turpis egestas. Etiam euismod tempor leo, in
+                  suscipit urna condimentum sed. Vivamus augue enim, consectetur
+                  ac interdum a, pulvinar ac massa. Nullam malesuada congue
+                </p>
+                <a href="#">Read More <i class="icon-arrow-right22"></i></a>
+              </div>
+              <div class="col-md-6 animate-box">
+                <img
+                  class="img-responsive"
+                  src="{% static 'images/cover_bg_2.jpg' %}"
+                  alt="travel"
+                />
+              </div>
+            </div>
+          </div>
         </div>
         {% include 'footer.html' %}
-
+      </div>
+      <!-- END fh5co-page -->
     </div>
-    <!-- END fh5co-page -->
+    <!-- END fh5co-wrapper -->
 
-</div>
-<!-- END fh5co-wrapper -->
-
-{% include 'JS.html' %}
-</body>
+    {% include 'JS.html' %}
+  </body>
 </html>
-
