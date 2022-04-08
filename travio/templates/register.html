@@ -1,24 +1,26 @@
 <!DOCTYPE html>
-<html class="no-js"> <!--<![endif]-->
+<html class="no-js">
+<!--<![endif]-->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Travel &mdash; 100% Free Fully Responsive HTML5 Template by FREEHTML5.co</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Free HTML5 Template by FREEHTML5.CO"/>
-    <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive"/>
-    <meta name="author" content="FREEHTML5.CO"/>
+    <meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
+    <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
+    <meta name="author" content="FREEHTML5.CO" />
 
     <!-- Facebook and Twitter integration -->
-    <meta property="og:title" content=""/>
-    <meta property="og:image" content=""/>
-    <meta property="og:url" content=""/>
-    <meta property="og:site_name" content=""/>
-    <meta property="og:description" content=""/>
-    <meta name="twitter:title" content=""/>
-    <meta name="twitter:image" content=""/>
-    <meta name="twitter:url" content=""/>
-    <meta name="twitter:card" content=""/>
+    <meta property="og:title" content="" />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:site_name" content="" />
+    <meta property="og:description" content="" />
+    <meta name="twitter:title" content="" />
+    <meta name="twitter:image" content="" />
+    <meta name="twitter:url" content="" />
+    <meta name="twitter:card" content="" />
 
     {% include 'CSS.html' %}
 
@@ -31,19 +33,20 @@
     </style>
 
 </head>
+
 <body>
     {% include 'header.html' %}
 
     <div class="fh5co-hero">
         <div class="fh5co-overlay"></div>
         <div class="fh5co-cover" data-stellar-background-ratio="0.5"
-             style="background-image: url(images/cover_bg_1.jpg);">
+            style="background-image: url(images/cover_bg_1.jpg);">
             <div class="desc">
                 {% for message in messages %}
                 <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
                     <strong>Message:</strong> {{ message }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 {% endfor %}
@@ -53,86 +56,91 @@
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
                                 <li role="presentation" class="active">
-                                    <a href="#login" aria-controls="login" role="tab"
-                                    data-toggle="tab">Sign In</a>
+                                    <a href="#login" aria-controls="login" role="tab" data-toggle="tab">Sign In</a>
                                 </li>
                                 <li role="presentation">
-                                    <a href="#register" aria-controls="register" role="tab"
-                                    data-toggle="tab">Sign Up</a>
+                                    <a href="#register" aria-controls="register" role="tab" data-toggle="tab">Sign
+                                        Up</a>
                                 </li>
                             </ul>
 
 
                             <!-- Tab panes -->
-                            <form action="Login" method="POST">
-                                {% csrf_token %}
-
-                                <div class="tab-content" class="tab-pane active" id="Login">
-                                    <div role="tabpanel">
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="login">
+                                    <form action="Login" method="POST">
+                                        {% csrf_token %}
+                                        <!-- <div class="tab-content" class="tab-pane active" id="Login"> -->
+                                        <div role="tabpanel" class="tab-pane active">
+                                            <div class="row">
+                                                <div class="col-xxs-12 col-xs-12 mt">
+                                                    <div class="input-field">
+                                                        <label for="username">Username</label>
+                                                        <input type="text" class="form-control" id="username"
+                                                            name="username" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-xxs-12 col-xs-12 mt alternate">
+                                                    <div class="input-field">
+                                                        <label for="password">Password</label>
+                                                        <input type="password" class="form-control" id="password"
+                                                            name="password" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12">
+                                                    <input type="submit" class="btn btn-primary btn-block"
+                                                        value="Submit">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="register">
+                                    <form action="signup" method="POST">
+                                        {% csrf_token %}
                                         <div class="row">
                                             <div class="col-xxs-12 col-xs-12 mt">
                                                 <div class="input-field">
                                                     <label for="username">Username</label>
-                                                    <input type="text" class="form-control" id="username" name="username"/>
+                                                    <input type="text" class="form-control" id="username"
+                                                        name="username" />
+                                                </div>
+                                            </div>
+                                            <div class="col-xxs-12 col-xs-12 mt alternate">
+                                                <div class="input-field">
+                                                    <label for="email">Email Id</label>
+                                                    <input type="email" class="form-control" id="email" name="email" />
                                                 </div>
                                             </div>
                                             <div class="col-xxs-12 col-xs-12 mt alternate">
                                                 <div class="input-field">
                                                     <label for="password">Password</label>
-                                                    <input type="password" class="form-control" id="password" name="password"/>
+                                                    <input type="password" class="form-control" id="password"
+                                                        name="password" />
+                                                </div>
+                                            </div>
+                                            <div class="col-xxs-12 col-xs-12 mt alternate">
+                                                <div class="input-field">
+                                                    <label for="cpswd"> Confirm Password</label>
+                                                    <input type="password" class="form-control" id="cpswd"
+                                                        name="cpswd" />
                                                 </div>
                                             </div>
                                             <div class="col-xs-12">
-                                                <input type="submit" class="btn btn-primary btn-block"
-                                                    value="Submit">
+                                                <input type="submit" class="btn btn-primary btn-block" value="Submit">
                                             </div>
                                         </div>
-                                    </div>
-                            </form>
-                            
-                            <form action="signup" method="POST">
-                                {% csrf_token %}
-
-                                <div role="tabpanel" class="tab-pane" id="register">
-                                    <div class="row">
-                                        <div class="col-xxs-12 col-xs-12 mt">
-                                            <div class="input-field">
-                                                <label for="username">Username</label>
-                                                <input type="text" class="form-control" id="username" name="username"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-xxs-12 col-xs-12 mt alternate">
-                                            <div class="input-field">
-                                                <label for="email">Email Id</label>
-                                                <input type="email" class="form-control" id="email" name="email"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-xxs-12 col-xs-12 mt alternate">
-                                            <div class="input-field">
-                                                <label for="password">Password</label>
-                                                <input type="password" class="form-control" id="password" name="password"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-xxs-12 col-xs-12 mt alternate">
-                                            <div class="input-field">
-                                                <label for="cpswd"> Confirm Password</label>
-                                                <input type="password" class="form-control" id="cpswd" name="cpswd"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12">
-                                            <input type="submit" class="btn btn-primary btn-block"
-                                                value="Submit">
-                                        </div>
-                                    </div>
+                                    </form>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
+    </div>
     </div>
     {% include 'JS.html' %}
 </body>
+
 </html>
