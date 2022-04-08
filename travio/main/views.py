@@ -186,7 +186,6 @@ def booking(request, hname):
 
 
 def payment(request, hname):
-
     if Hotel.objects.filter(hotelName=hname).exists():
         hname = Hotel.objects.all().filter(hotelName=hname)
         bn = hname.hotelName
